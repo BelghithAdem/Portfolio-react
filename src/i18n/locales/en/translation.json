@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "name": "Belghith Adem",
+    "title": "Full-Stack Developer",
+    "description": "Passionate about creating innovative and scalable solutions",
+    "downloadCv": "Download CV",
+    "viewProjects": "View my projects"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "4th year software engineering student, I am passionate about creating innovative, scalable, and user-centered solutions. I have good adaptability, strong product quality sensitivity, and a constant willingness to learn and innovate.",
+    "contact": "Contact",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "downloadCV": "Download CV"
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "subtitle": "My professional journey and achievements",
+    "remote": "Remote",
+    "internship": "Internship",
+    "viewMore": "View more experiences"
+  },
+  "projects": {
+    "title": "My Projects",
+    "subtitle": "A selection of my academic and professional achievements",
+    "viewProject": "View project",
+    "liveDemo": "Live Demo",
+    "repository": "Repository",
+    "academic": "Academic",
+    "professional": "Professional"
+  },
+  "skills": {
+    "title": "Technical Skills",
+    "subtitle": "Deep technical expertise in modern web and mobile development technologies",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "databases": "Databases",
+    "devops": "DevOps & Tools",
+    "technologies": "Technologies and frameworks",
+    "softSkills": {
+      "title": "Soft Skills",
+      "subtitle": "Beyond technical skills, essential competencies for success",
+      "problemSolving": "Problem Solving",
+      "teamwork": "Teamwork",
+      "innovation": "Innovation"
+    },
+    "languages": {
+      "title": "Languages",
+      "subtitle": "Linguistic mastery for effective international communication",
+      "comprehension": "Comprehension",
+      "expression": "Expression",
+      "writing": "Writing",
+      "native": "Native language",
+      "advanced": "Advanced",
+      "intermediate": "Intermediate",
+      "basic": "Basic",
+      "summary": "Language Summary",
+      "summaryText": "Trilingual proficiency with the ability to work in international environments and communicate effectively with multicultural teams."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Don't hesitate to contact me to discuss your projects",
+    "getInTouch": "Let's get in touch",
+    "sendMessage": "Send message"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "madeWith": "Made with"
+  }
+} 

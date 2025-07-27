@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "experience": "Expérience",
+    "projects": "Projets",
+    "skills": "Compétences",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Bonjour, je suis",
+    "name": "Belghith Adem",
+    "title": "Développeur Full-Stack",
+    "description": "Passionné par la création de solutions innovantes et évolutives",
+    "downloadCv": "Télécharger CV",
+    "viewProjects": "Voir mes projets"
+  },
+  "about": {
+    "title": "À propos de moi",
+    "description": "Ingénieur en 4ᵉ année en génie logiciel, je suis passionné par la création de solutions innovantes, évolutives et centrées sur l'utilisateur. Je possède une bonne capacité d'adaptation, une forte sensibilité à la qualité du produit et une volonté constante d'apprendre et d'innover.",
+    "contact": "Contact",
+    "email": "Email",
+    "phone": "Téléphone",
+    "location": "Localisation",
+    "downloadCV": "Télécharger CV"
+  },
+  "experience": {
+    "title": "Expérience Professionnelle",
+    "subtitle": "Mon parcours professionnel et mes réalisations",
+    "remote": "Télétravail",
+    "internship": "Stage",
+    "viewMore": "Voir plus d'expériences"
+  },
+  "projects": {
+    "title": "Mes Projets",
+    "subtitle": "Une sélection de mes réalisations académiques et professionnelles",
+    "viewProject": "Voir le projet",
+    "liveDemo": "Démo Live",
+    "repository": "Repository",
+    "academic": "Académique",
+    "professional": "Professionnel"
+  },
+  "skills": {
+    "title": "Compétences Techniques",
+    "subtitle": "Expertise technique approfondie dans les technologies modernes du développement web et mobile",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "databases": "Bases de données",
+    "devops": "DevOps & Outils",
+    "technologies": "Technologies et frameworks",
+    "softSkills": {
+      "title": "Compétences Transversales",
+      "subtitle": "Au-delà du technique, des compétences essentielles pour la réussite",
+      "problemSolving": "Résolution de problèmes",
+      "teamwork": "Travail d'équipe",
+      "innovation": "Innovation"
+    },
+    "languages": {
+      "title": "Langues",
+      "subtitle": "Maîtrise linguistique pour une communication internationale efficace",
+      "comprehension": "Compréhension",
+      "expression": "Expression",
+      "writing": "Écrit",
+      "native": "Langue maternelle",
+      "advanced": "Avancé",
+      "intermediate": "Intermédiaire",
+      "basic": "Basique",
+      "summary": "Résumé Linguistique",
+      "summaryText": "Maîtrise trilingue avec une capacité à travailler dans des environnements internationaux et à communiquer efficacement avec des équipes multiculturelles."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "N'hésitez pas à me contacter pour discuter de vos projets",
+    "getInTouch": "Entrons en contact",
+    "sendMessage": "Envoyer un message"
+  },
+  "footer": {
+    "rights": "Tous droits réservés",
+    "madeWith": "Fait avec"
+  }
+} 
