@@ -48,7 +48,7 @@ const Header = () => {
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <span className="text-blue-600">&lt;</span>
-            <span className="text-gray-800">Belghith Adem</span>aaaa
+            <span className="text-gray-800">Belghith Adem</span>
             <span className="text-blue-600">/&gt;</span>
           </motion.div>
 
