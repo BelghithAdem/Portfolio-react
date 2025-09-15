@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaBriefcase, FaMapMarkerAlt, FaCalendarAlt, FaCode, FaUsers, FaCog } from 'react-icons/fa';
+import { FaBriefcase, FaMapMarkerAlt, FaCalendarAlt, FaCode, FaUsers, FaCog, FaBolt, FaFeather } from 'react-icons/fa';
+import { SiVuedotjs, SiTailwindcss, SiTypescript, SiNextdotjs, SiGraphql, SiExpress, SiReact, SiRadixui, SiAngular, SiNodedotjs, SiMongodb } from 'react-icons/si';
 import { usePortfolioData } from '../hooks/usePortfolioData';
 
 const Experience = () => {
@@ -49,6 +50,59 @@ const Experience = () => {
       return { text: 'Stage', color: 'bg-blue-100 text-blue-700' };
     }
     return { text: 'Full-time', color: 'bg-purple-100 text-purple-700' };
+  };
+
+  const getTechMeta = (name) => {
+    const n = (name || '').toLowerCase();
+    if (n.includes('vue')) {
+      return { icon: <SiVuedotjs className="text-green-600" />, classes: 'bg-green-50 text-green-700 border-green-200' };
+    }
+    if (n.includes('tailwind')) {
+      return { icon: <SiTailwindcss className="text-cyan-600" />, classes: 'bg-cyan-50 text-cyan-700 border-cyan-200' };
+    }
+    if (n.includes('typescript')) {
+      return { icon: <SiTypescript className="text-blue-600" />, classes: 'bg-blue-50 text-blue-700 border-blue-200' };
+    }
+    if (n.includes('mercure')) {
+      return { icon: <FaBolt className="text-amber-600" />, classes: 'bg-amber-50 text-amber-700 border-amber-200' };
+    }
+    if (n.includes('shadcn')) {
+      return { icon: <SiRadixui className="text-indigo-600" />, classes: 'bg-indigo-50 text-indigo-700 border-indigo-200' };
+    }
+    if (n.includes('lucide')) {
+      return { icon: <FaFeather className="text-slate-600" />, classes: 'bg-slate-50 text-slate-700 border-slate-200' };
+    }
+    if (n.includes('react native')) {
+      return { icon: <SiReact className="text-cyan-600" />, classes: 'bg-cyan-50 text-cyan-700 border-cyan-200' };
+    }
+    if (n.includes('react')) {
+      return { icon: <SiReact className="text-cyan-600" />, classes: 'bg-cyan-50 text-cyan-700 border-cyan-200' };
+    }
+    if (n.includes('next')) {
+      return { icon: <SiNextdotjs className="text-gray-800" />, classes: 'bg-gray-100 text-gray-800 border-gray-300' };
+    }
+    if (n.includes('graphql')) {
+      return { icon: <SiGraphql className="text-pink-600" />, classes: 'bg-pink-50 text-pink-700 border-pink-200' };
+    }
+    if (n.includes('express')) {
+      return { icon: <SiExpress className="text-zinc-700" />, classes: 'bg-zinc-50 text-zinc-700 border-zinc-200' };
+    }
+    if (n.includes('angular')) {
+      return { icon: <SiAngular className="text-red-600" />, classes: 'bg-red-50 text-red-700 border-red-200' };
+    }
+    if (n.includes('node')) {
+      return { icon: <SiNodedotjs className="text-green-700" />, classes: 'bg-green-50 text-green-700 border-green-200' };
+    }
+    if (n.includes('mongo')) {
+      return { icon: <SiMongodb className="text-emerald-700" />, classes: 'bg-emerald-50 text-emerald-700 border-emerald-200' };
+    }
+    if (n.includes('sails')) {
+      return { icon: <FaCog className="text-teal-700" />, classes: 'bg-teal-50 text-teal-700 border-teal-200' };
+    }
+    if (n.includes('gmao')) {
+      return { icon: <FaCog className="text-yellow-600" />, classes: 'bg-yellow-50 text-yellow-700 border-yellow-200' };
+    }
+    return { icon: <FaCog className="text-blue-600" />, classes: 'bg-blue-50 text-blue-700 border-blue-200' };
   };
 
   return (
@@ -161,23 +215,19 @@ const Experience = () => {
                         Technologies & Compétences
                       </h4>
                       <div className="flex flex-wrap gap-3">
-                        {exp.title.includes('Front-End') && (
-                          <>
-                            <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold hover:bg-blue-200 transition-colors">Vue.js</span>
-                            <span className="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold hover:bg-green-200 transition-colors">React Native</span>
-                            <span className="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-semibold hover:bg-purple-200 transition-colors">Next.js</span>
-                            <span className="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold hover:bg-indigo-200 transition-colors">GraphQL</span>
-                            <span className="px-4 py-2 bg-teal-100 text-teal-800 rounded-full text-sm font-semibold hover:bg-teal-200 transition-colors">Express.js</span>
-                          </>
-                        )}
-                        {exp.title.includes('Stage') && (
-                          <>
-                            <span className="px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-semibold hover:bg-red-200 transition-colors">Angular</span>
-                            <span className="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold hover:bg-green-200 transition-colors">Node.js</span>
-                            <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold hover:bg-blue-200 transition-colors">MongoDB</span>
-                            <span className="px-4 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-semibold hover:bg-orange-200 transition-colors">Sails.js</span>
-                            <span className="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full text-sm font-semibold hover:bg-yellow-200 transition-colors">GMAO</span>
-                          </>
+                        {Array.isArray(exp.technologies) && exp.technologies.length > 0 && (
+                          exp.technologies.map((tech, techIndex) => {
+                            const meta = getTechMeta(tech);
+                            return (
+                              <span
+                                key={techIndex}
+                                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border hover:opacity-90 transition-colors ${meta.classes}`}
+                              >
+                                <span className="text-base">{meta.icon}</span>
+                                <span>{tech}</span>
+                              </span>
+                            );
+                          })
                         )}
                       </div>
                     </div>

@@ -12,6 +12,27 @@ export const portfolioDataEn = {
   profile: "4th year software engineering student, I am passionate about creating innovative, scalable, and user-centered solutions. I have good adaptability, strong product quality sensitivity, and a constant willingness to learn and innovate.",
   experience: [
     {
+      title: "Front-End Developer (Mission)",
+      company: "Tadkik",
+      location: "Tunisia",
+      date: "04/2025 – 09/2025",
+      tasks: [
+        "Built a multi-tenant audit SaaS front-end with Vue 3.",
+        "Integrated REST APIs with tenant-aware routing and access control.",
+        "Implemented analytics dashboards with Chart.js and scheduling with FullCalendar.",
+        "Delivered reusable and maintainable UI components.",
+        "Contributed to product/branding pages: TDK CRM, TDK Manager, secure platform messaging."
+      ],
+      technologies: [
+        "Vue.js",
+        "Tailwind CSS",
+        "TypeScript",
+        "Mercure (real-time)",
+        "shadcn/ui",
+        "Lucide.dev"
+      ],
+    }, 
+    {
       title: "Front-End Developer (Remote)",
       company: "Synque",
       location: "Hong Kong",
@@ -20,6 +41,13 @@ export const portfolioDataEn = {
         "Vue.js web development, including REST API integration and production bug resolution.",
         "React Native mobile redesign, focused on UX, performance, and debugging.",
         "Collaboration with international teams to deliver reliable and optimized software solutions."
+      ],
+      technologies: [
+        "Vue.js",
+        "React Native",
+        "Next.js",
+        "GraphQL",
+        "Express.js"
       ]
     },
     {
@@ -30,6 +58,13 @@ export const portfolioDataEn = {
       tasks: [
         "CMMS with Angular, Node.js (Sails.js) and MongoDB.",
         "Intuitive user interface for maintenance."
+      ],
+      technologies: [
+        "Angular",
+        "Node.js",
+        "MongoDB",
+        "Sails.js",
+        "GMAO"
       ]
     }
   ],

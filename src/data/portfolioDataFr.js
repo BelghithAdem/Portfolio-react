@@ -12,6 +12,27 @@ export const portfolioDataFr = {
     profile: "Ingénieur en 4ᵉ année en génie logiciel, je suis passionné par la création de solutions innovantes, évolutives et centrées sur l'utilisateur. Je possède une bonne capacité d'adaptation, une forte sensibilité à la qualité du produit et une volonté constante d'apprendre et d'innover.",
     experience: [
       {
+        title: "Développeur Front-End (Mission)",
+        company: "Tadkik",
+        location: "Tunisie",
+        date: "04/2025 – 09/2025",
+        tasks: [
+          "Développement du front-end d'un SaaS d'audit multi-tenant avec Vue 3.",
+          "Intégration d'API REST avec routage et contrôle d'accès multi-locataires.",
+          "Tableaux de bord analytiques avec Chart.js et planification avec FullCalendar.",
+          "Création de composants UI réutilisables et maintenables.",
+          "Contribution aux pages produit/branding : TDK CRM, TDK Manager et messages de plateforme sécurisée."
+        ],
+        technologies: [
+          "Vue.js",
+          "Tailwind CSS",
+          "TypeScript",
+          "Mercure (temps réel)",
+          "shadcn/ui",
+          "Lucide.dev"
+        ],
+      },
+      {
         title: "Développeur Front-End (Télétravail)",
         company: "Synque",
         location: "Hong Kong",
@@ -20,6 +41,13 @@ export const portfolioDataFr = {
           "Développement web Vue.js, incluant intégration API REST et résolution de bugs en production.",
           "Refonte mobile React Native, axée sur l'UX, la performance et le débogage.",
           "Collaboration avec équipes internationales pour livrer des solutions logicielles fiables et optimisées."
+        ],
+        technologies: [
+          "Vue.js",
+          "React Native",
+          "Next.js",
+          "GraphQL",
+          "Express.js"
         ]
       },
       {
@@ -30,6 +58,13 @@ export const portfolioDataFr = {
         tasks: [
           "GMAO avec Angular, Node.js (Sails.js) et MongoDB.",
           "Interface utilisateur intuitive pour la maintenance."
+        ],
+        technologies: [
+          "Angular",
+          "Node.js",
+          "MongoDB",
+          "Sails.js",
+          "GMAO"
         ]
       }
     ],
