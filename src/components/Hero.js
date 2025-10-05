@@ -119,14 +119,17 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
             variants={itemVariants}
           >
-            <motion.button
+            <motion.a
+              href="https://flowcv.com/resume/o6vebkrtdq"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               <FaDownload />
               {t('hero.downloadCv')}
-            </motion.button>
+            </motion.a>
 
             <Link to="projects" smooth={true} duration={500} offset={-80}>
               <motion.button
