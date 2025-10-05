@@ -12,6 +12,27 @@ export const portfolioDataEn = {
   profile: "4th year software engineering student, I am passionate about creating innovative, scalable, and user-centered solutions. I have good adaptability, strong product quality sensitivity, and a constant willingness to learn and innovate.",
   experience: [
     {
+      title: "Summer Internship",
+      company: "NEXT STEP",
+      location: "Ech-Charguia, Tunis, Tunisia",
+      date: "08/2025 – 09/2025",
+      tasks: [
+        "Contributed to the development of an AI-powered application for smart task assistance.",
+        "Designed and implemented REST APIs for data and workflow management.",
+        "Integrated a Large Language Model (LLM) to provide intelligent suggestions.",
+        "Implemented secure data access with role-based permissions.",
+        "Tested and validated workflows to ensure system reliability and scalability."
+      ],
+      technologies: [
+        "FastAPI",
+        "MongoDB Atlas",
+        "Next.js",
+        "Node.js",
+        "Google Gemini",
+        "Large Language Models (LLM)"
+      ],
+    },
+    {
       title: "Front-End Developer (Mission)",
       company: "Tadkik",
       location: "Tunisia",

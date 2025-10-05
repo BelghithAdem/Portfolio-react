@@ -12,6 +12,27 @@ export const portfolioDataFr = {
     profile: "Ingénieur en 4ᵉ année en génie logiciel, je suis passionné par la création de solutions innovantes, évolutives et centrées sur l'utilisateur. Je possède une bonne capacité d'adaptation, une forte sensibilité à la qualité du produit et une volonté constante d'apprendre et d'innover.",
     experience: [
       {
+        title: "Stage d'Été",
+        company: "NEXT STEP",
+        location: "Ech-Charguia, Tunis, Tunisie",
+        date: "08/2025 – 09/2025",
+        tasks: [
+          "Contribution au développement d'une application alimentée par l'IA pour l'assistance intelligente aux tâches.",
+          "Conception et mise en œuvre d'API REST pour la gestion des données et des flux de travail.",
+          "Intégration d'un Large Language Model (LLM) pour fournir des suggestions intelligentes.",
+          "Mise en place d'un accès sécurisé aux données avec permissions basées sur les rôles.",
+          "Tests et validation des flux de travail pour garantir la fiabilité et l'évolutivité du système."
+        ],
+        technologies: [
+          "FastAPI",
+          "MongoDB Atlas",
+          "Next.js",
+          "Node.js",
+          "Google Gemini",
+          "Large Language Models (LLM)"
+        ],
+      },
+      {
         title: "Développeur Front-End (Mission)",
         company: "Tadkik",
         location: "Tunisie",
