@@ -91,6 +91,19 @@ export const portfolioDataEn = {
   ],
   projects: [
     {
+      name: "WeeFarm",
+      date: "2024 – Present",
+      image: "/images/projects/weefarm.png",
+      github: "",
+      live: "https://wee-farm.com/en",
+      category: "professional",
+      description: [
+        "E-commerce platform for farmers built with Next.js and Node.js/Express backend.",
+        "Integrated Konnect Pay payment gateway for secure transactions.",
+        "Full-stack solution connecting farmers with customers, featuring product management and order processing."
+      ]
+    },
+    {
       name: "Medical Recording",
       date: "01/05/2025 – 06/07/2025",
       image: "/images/projects/recordMedical.png",
