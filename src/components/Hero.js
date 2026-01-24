@@ -33,9 +33,9 @@ const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background Animation */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-cyan-50">
         <motion.div
-          className="absolute top-20 left-20 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+          className="absolute top-20 left-20 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-60"
           animate={{
             scale: [1, 2, 2, 1, 1],
             rotate: [0, 90, 180, 270, 360],
@@ -48,7 +48,7 @@ const Hero = () => {
           }}
         />
         <motion.div
-          className="absolute top-40 right-20 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+          className="absolute top-40 right-20 w-72 h-72 bg-cyan-200 rounded-full mix-blend-multiply filter blur-xl opacity-60"
           animate={{
             scale: [2, 1, 1, 2, 2],
             rotate: [360, 270, 180, 90, 0],
@@ -61,7 +61,7 @@ const Hero = () => {
           }}
         />
         <motion.div
-          className="absolute -bottom-8 left-20 w-72 h-72 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+          className="absolute -bottom-8 left-20 w-72 h-72 bg-slate-200 rounded-full mix-blend-multiply filter blur-xl opacity-50"
           animate={{
             scale: [1, 2, 2, 1, 1],
             rotate: [180, 270, 360, 90, 180],
@@ -123,7 +123,7 @@ const Hero = () => {
               href="https://flowcv.com/resume/o6vebkrtdq"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
+              className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >

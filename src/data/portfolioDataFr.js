@@ -9,19 +9,74 @@ export const portfolioDataFr = {
       github: "https://github.com/BelghithAdem",
       portfolio: "https://belghithadem.netlify.app/"
     },
-    profile: "Ingénieur en 4ᵉ année en génie logiciel, je suis passionné par la création de solutions innovantes, évolutives et centrées sur l'utilisateur. Je possède une bonne capacité d'adaptation, une forte sensibilité à la qualité du produit et une volonté constante d'apprendre et d'innover.",
+    profile: "Ingénieur logiciel Full-Stack spécialisé dans le développement d'applications web modernes, performantes et scalables. Expérience sur des projets SaaS, monorepo et architectures frontend modernes.",
     experience: [
       {
-        title: "Stage d'Été",
+        title: "Développeur Front-End",
+        company: "Wee Farm",
+        location: "Tunisie",
+        date: "09/2025 – 12/2025",
+        tasks: [
+          "Développement d'interfaces performantes avec Next.js.",
+          "Travail en monorepo (Turborepo) pour améliorer la scalabilité.",
+          "Mise en place de Storybook et création de composants UI réutilisables.",
+          "Collaboration avec l'équipe produit."
+        ],
+        technologies: [
+          "Next.js",
+          "TypeScript",
+          "Turborepo",
+          "Storybook",
+          "Tailwind CSS"
+        ]
+      },
+      {
+        title: "Développeur Full-Stack",
+        company: "Tadkik",
+        location: "Tunisie",
+        date: "05/2025 – 09/2025",
+        tasks: [
+          "Développement front-end d'un SaaS multi-tenant avec Vue 3.",
+          "Intégration d'API REST et gestion des accès.",
+          "Création de dashboards analytiques et fonctionnalités de planification.",
+          "Développement de composants UI réutilisables."
+        ],
+        technologies: [
+          "Vue.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "Chart.js",
+          "FullCalendar",
+          "Mercure",
+          "shadcn/ui"
+        ]
+      },
+      {
+        title: "Développeur Front-End",
+        company: "Synque",
+        location: "Hong Kong",
+        date: "01/2024 – 06/2025",
+        tasks: [
+          "Création de pages web dynamiques avec des composants modulaires utilisant Vue.js.",
+          "Refonte d'une application React Native pour optimiser performances et scalabilité.",
+          "Participation au développement d'un projet Next.js avec des fonctionnalités front-end modernes."
+        ],
+        technologies: [
+          "Vue.js",
+          "React Native",
+          "Tailwind CSS",
+          "Next.js"
+        ]
+      },
+      {
+        title: "Développeur Full-Stack – Stage d'Été",
         company: "NEXT STEP",
-        location: "Ech-Charguia, Tunis, Tunisie",
+        location: "Charguia Tunis",
         date: "08/2025 – 09/2025",
         tasks: [
-          "Contribution au développement d'une application alimentée par l'IA pour l'assistance intelligente aux tâches.",
-          "Conception et mise en œuvre d'API REST pour la gestion des données et des flux de travail.",
-          "Intégration d'un Large Language Model (LLM) pour fournir des suggestions intelligentes.",
-          "Mise en place d'un accès sécurisé aux données avec permissions basées sur les rôles.",
-          "Tests et validation des flux de travail pour garantir la fiabilité et l'évolutivité du système."
+          "Développement de services API scalables avec FastAPI.",
+          "Conception d'interfaces utilisateur modernes avec Next.js.",
+          "Intégration de fonctionnalités LLM pour fournir des suggestions intelligentes."
         ],
         technologies: [
           "FastAPI",
@@ -29,63 +84,26 @@ export const portfolioDataFr = {
           "Next.js",
           "Node.js",
           "Google Gemini",
-          "Large Language Models (LLM)"
-        ],
-      },
-      {
-        title: "Développeur Front-End (Mission)",
-        company: "Tadkik",
-        location: "Tunisie",
-        date: "04/2025 – 09/2025",
-        tasks: [
-          "Développement du front-end d'un SaaS d'audit multi-tenant avec Vue 3.",
-          "Intégration d'API REST avec routage et contrôle d'accès multi-locataires.",
-          "Tableaux de bord analytiques avec Chart.js et planification avec FullCalendar.",
-          "Création de composants UI réutilisables et maintenables.",
-          "Contribution aux pages produit/branding : TDK CRM, TDK Manager et messages de plateforme sécurisée."
-        ],
-        technologies: [
-          "Vue.js",
-          "Tailwind CSS",
-          "TypeScript",
-          "Mercure (temps réel)",
-          "shadcn/ui",
-          "Lucide.dev"
-        ],
-      },
-      {
-        title: "Développeur Front-End (Télétravail)",
-        company: "Synque",
-        location: "Hong Kong",
-        date: "01/2024 – 06/2025",
-        tasks: [
-          "Développement web Vue.js, incluant intégration API REST et résolution de bugs en production.",
-          "Refonte mobile React Native, axée sur l'UX, la performance et le débogage.",
-          "Collaboration avec équipes internationales pour livrer des solutions logicielles fiables et optimisées."
-        ],
-        technologies: [
-          "Vue.js",
-          "React Native",
-          "Next.js",
-          "GraphQL",
-          "Express.js"
+          "LLM",
+          "LangChain"
         ]
       },
       {
-        title: "Stage de Fin d'Études",
-        company: "Société des eaux minérales (Sabrine)",
+        title: "Développeur – Stage d'Été",
+        company: "Orange Tunisia",
         location: "Tunisie",
-        date: "04/2023 – 07/2023",
+        date: "07/2025 – 08/2025",
         tasks: [
-          "GMAO avec Angular, Node.js (Sails.js) et MongoDB.",
-          "Interface utilisateur intuitive pour la maintenance."
+          "Création d'un tableau de bord KPI en temps réel avec Grafana.",
+          "Extraction et nettoyage des données à partir de fichiers CSV.",
+          "Connexion et intégration de la base de données avec Grafana pour la visualisation du tableau de bord."
         ],
         technologies: [
-          "Angular",
-          "Node.js",
-          "MongoDB",
-          "Sails.js",
-          "GMAO"
+          "Python",
+          "ClickHouse",
+          "Grafana",
+          "REST APIs",
+          "SSH"
         ]
       }
     ],
@@ -93,7 +111,7 @@ export const portfolioDataFr = {
       {
         name: "WeeFarm",
         date: "2024 – Présent",
-        image: "/images/projects/weefarm.png",
+        image: "/images/projects/wee-farm.png",
         github: "",
         live: "https://wee-farm.com/en",
         category: "professional",
@@ -101,32 +119,6 @@ export const portfolioDataFr = {
           "Plateforme e-commerce pour agriculteurs développée avec Next.js et backend Node.js/Express.",
           "Intégration de la passerelle de paiement Konnect Pay pour des transactions sécurisées.",
           "Solution full-stack connectant les agriculteurs aux clients, avec gestion de produits et traitement des commandes."
-        ]
-      },
-      {
-        name: "Medical Recording",
-        date: "01/05/2025 – 06/07/2025",
-        image: "/images/projects/recordMedical.png",
-        github: "https://github.com/BelghithAdem/Medical_Record",
-        live: "",
-        category: "academic",
-        description: [
-          "Système de gestion médicale avec ASP.NET Core backend et Next.js frontend.",
-          "Multi-rôles : Docteur, Patient, Admin avec calendrier FullCalendar.",
-          "API REST avec Swagger, PostgreSQL et interface Tailwind CSS."
-        ]
-      },
-      {
-        name: "Mincraft",
-        date: "01/2025 – 02/2025",
-        image: "/images/projects/Mincraft.png",
-        github: "https://gitlab.com/BelghithAdem/mincraft_frontend",
-        live: "https://mincraft-project-frontend.vercel.app/",
-        category: "academic",
-        description: [
-          "Plateforme web/mobile de formation (React/React Native).",
-          "Admin panel performant, intégration AWS S3.",
-          "Déploiement via Docker + CI/CD GitLab."
         ]
       },
       {
@@ -167,60 +159,52 @@ export const portfolioDataFr = {
           "Interface utilisateur intuitive avec Vue 3 + Vite.",
           "Fonctionnalités de recherche et navigation avancées."
         ]
-      },
-      {
-        name: "Social Media",
-        date: "09/2024 – 12/2024",
-        image: "/images/projects/Social1.png",
-        github: "https://github.com/BelghithAdem/Media",
-        live: "",
-        category: "academic",
-        description: [
-          "Réseau social sécurisé avec messagerie en temps réel.",
-          "Authentification 2FA, WebSocket.",
-          "Stack : Spring Boot, Angular, Hibernate, Tailwind, MySQL."
-        ]
       }
     ],
     skills: {
       frontend: [
-        { name: "Angular", level: "Éducatif" },
         { name: "Vue.js", level: "Pro" },
         { name: "React", level: "Pro" },
         { name: "Next.js", level: "Pro" },
-        { name: "Tailwind CSS", level: "Pro" }
+        { name: "Tailwind CSS", level: "Pro" },
+        { name: "TypeScript", level: "Pro" }
       ],
       backend: [
-        { name: "Spring Boot", level: "Éducatif" },
         { name: "Node.js", level: "Pro" },
-        { name: "Express.js", level: "Pro" },
-        { name: "GraphQL", level: "Pro" },
-        { name: "REST API", level: "Pro" },
-        { name: "WebSocket", level: "Pro" }
+        { name: "FastAPI", level: "Pro" },
+        { name: "WebSocket", level: "Pro" },
+        { name: "Java", level: "Pro" },
+        { name: "Python", level: "Pro" }
       ],
       databases: [
-        { name: "MongoDB", level: "Éducatif" },
-        { name: "PostgreSQL", level: "Éducatif" },
+        { name: "PostgreSQL", level: "Pro" },
         { name: "MySQL", level: "Pro" },
-        { name: "MongoDB", level: "Pro" }
+        { name: "MongoDB", level: "Pro" },
+        { name: "Redis", level: "Pro" }
       ],
       devops: [
         { name: "Docker", level: "Pro" },
-        { name: "Docker Compose", level: "Pro" },
-        { name: "GitLab CI/CD", level: "Pro" }
+        { name: "Kubernetes", level: "Pro" },
+        { name: "GitLab CI/CD", level: "Pro" },
+        { name: "AWS", level: "Pro" },
+        { name: "Helm", level: "Pro" },
+        { name: "Prometheus", level: "Pro" },
+        { name: "Grafana", level: "Pro" },
+        { name: "Storybook", level: "Pro" },
+        { name: "Turborepo", level: "Pro" }
       ]
     },
     education: [
       {
-        institution: "Tek-up University",
+        institution: "Tek-up",
         location: "Ariana, Tunisie",
-        program: "Diplôme d'Ingénieur en Génie Logiciel et Systèmes d'Information",
-        date: "2023 – Présent"
+        program: "Cycle d'Ingénieur en Informatique - Diplôme d'Ingénieur en Génie Logiciel et Systèmes d'Information",
+        date: "2023 – 2026"
       },
       {
         institution: "ISET",
         location: "Kairouan, Tunisie",
-        program: "Licence en Technologie Informatique",
+        program: "Licence en Technologie Informatique - Spécialisé en technologie informatique",
         date: "2020 – 2023"
       }
     ],

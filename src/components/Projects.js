@@ -2,9 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaGithub, FaGitlab, FaExternalLinkAlt, FaCode, FaMobile, FaServer, FaEye, FaVuejs, FaWordpress, FaShoppingCart, FaExclamationCircle, FaStethoscope } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import { usePortfolioData } from '../hooks/usePortfolioData';
 
 const Projects = () => {
+  const { t } = useTranslation();
   const portfolioData = usePortfolioData();
   const [ref, inView] = useInView({
     threshold: 0.3,
@@ -140,7 +142,7 @@ const Projects = () => {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Mes Projets</h2>
+          <h2 className="section-title">{t('projects.title')}</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Découvrez mes projets récents qui démontrent mes compétences en développement full-stack et ma passion pour l'innovation
           </p>

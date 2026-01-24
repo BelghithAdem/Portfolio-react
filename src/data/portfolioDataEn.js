@@ -9,19 +9,74 @@ export const portfolioDataEn = {
     github: "https://github.com/BelghithAdem",
     portfolio: "https://belghithadem.netlify.app/"
   },
-  profile: "4th year software engineering student, I am passionate about creating innovative, scalable, and user-centered solutions. I have good adaptability, strong product quality sensitivity, and a constant willingness to learn and innovate.",
+  profile: "Full-Stack Software Engineer specialized in developing modern, performant, and scalable web applications. Experience with SaaS projects, monorepo, and modern frontend architectures.",
   experience: [
     {
-      title: "Summer Internship",
+      title: "Front-End Developer",
+      company: "Wee Farm",
+      location: "Tunisia",
+      date: "09/2025 – 12/2025",
+      tasks: [
+        "Developed high-performance interfaces with Next.js.",
+        "Worked in monorepo (Turborepo) to improve scalability.",
+        "Set up Storybook and created reusable UI components.",
+        "Collaborated with the product team."
+      ],
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Turborepo",
+        "Storybook",
+        "Tailwind CSS"
+      ]
+    },
+    {
+      title: "Full-Stack Developer",
+      company: "Tadkik",
+      location: "Tunisia",
+      date: "05/2025 – 09/2025",
+      tasks: [
+        "Developed front-end of a multi-tenant SaaS with Vue 3.",
+        "Integrated REST APIs and managed access control.",
+        "Created analytical dashboards and scheduling features.",
+        "Developed reusable UI components."
+      ],
+      technologies: [
+        "Vue.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Chart.js",
+        "FullCalendar",
+        "Mercure",
+        "shadcn/ui"
+      ]
+    },
+    {
+      title: "Front-End Developer",
+      company: "Synque",
+      location: "Hong Kong",
+      date: "01/2024 – 06/2025",
+      tasks: [
+        "Created dynamic web pages with modular components using Vue.js.",
+        "Redesigned a React Native application to optimize performance and scalability.",
+        "Participated in developing a Next.js project with modern front-end features."
+      ],
+      technologies: [
+        "Vue.js",
+        "React Native",
+        "Tailwind CSS",
+        "Next.js"
+      ]
+    },
+    {
+      title: "Full-Stack Developer – Summer Internship",
       company: "NEXT STEP",
-      location: "Ech-Charguia, Tunis, Tunisia",
+      location: "Charguia Tunis",
       date: "08/2025 – 09/2025",
       tasks: [
-        "Contributed to the development of an AI-powered application for smart task assistance.",
-        "Designed and implemented REST APIs for data and workflow management.",
-        "Integrated a Large Language Model (LLM) to provide intelligent suggestions.",
-        "Implemented secure data access with role-based permissions.",
-        "Tested and validated workflows to ensure system reliability and scalability."
+        "Developed scalable API services with FastAPI.",
+        "Designed modern user interfaces with Next.js.",
+        "Integrated LLM features to provide intelligent suggestions."
       ],
       technologies: [
         "FastAPI",
@@ -29,63 +84,26 @@ export const portfolioDataEn = {
         "Next.js",
         "Node.js",
         "Google Gemini",
-        "Large Language Models (LLM)"
-      ],
-    },
-    {
-      title: "Front-End Developer (Mission)",
-      company: "Tadkik",
-      location: "Tunisia",
-      date: "04/2025 – 09/2025",
-      tasks: [
-        "Built a multi-tenant audit SaaS front-end with Vue 3.",
-        "Integrated REST APIs with tenant-aware routing and access control.",
-        "Implemented analytics dashboards with Chart.js and scheduling with FullCalendar.",
-        "Delivered reusable and maintainable UI components.",
-        "Contributed to product/branding pages: TDK CRM, TDK Manager, secure platform messaging."
-      ],
-      technologies: [
-        "Vue.js",
-        "Tailwind CSS",
-        "TypeScript",
-        "Mercure (real-time)",
-        "shadcn/ui",
-        "Lucide.dev"
-      ],
-    }, 
-    {
-      title: "Front-End Developer (Remote)",
-      company: "Synque",
-      location: "Hong Kong",
-      date: "01/2024 – 06/2025",
-      tasks: [
-        "Vue.js web development, including REST API integration and production bug resolution.",
-        "React Native mobile redesign, focused on UX, performance, and debugging.",
-        "Collaboration with international teams to deliver reliable and optimized software solutions."
-      ],
-      technologies: [
-        "Vue.js",
-        "React Native",
-        "Next.js",
-        "GraphQL",
-        "Express.js"
+        "LLM",
+        "LangChain"
       ]
     },
     {
-      title: "Final Year Internship",
-      company: "Mineral Water Company (Sabrine)",
+      title: "Developer – Summer Internship",
+      company: "Orange Tunisia",
       location: "Tunisia",
-      date: "04/2023 – 07/2023",
+      date: "07/2025 – 08/2025",
       tasks: [
-        "CMMS with Angular, Node.js (Sails.js) and MongoDB.",
-        "Intuitive user interface for maintenance."
+        "Created a real-time KPI dashboard with Grafana.",
+        "Extracted and cleaned data from CSV files.",
+        "Connected and integrated the database with Grafana for dashboard visualization."
       ],
       technologies: [
-        "Angular",
-        "Node.js",
-        "MongoDB",
-        "Sails.js",
-        "GMAO"
+        "Python",
+        "ClickHouse",
+        "Grafana",
+        "REST APIs",
+        "SSH"
       ]
     }
   ],
@@ -93,7 +111,7 @@ export const portfolioDataEn = {
     {
       name: "WeeFarm",
       date: "2024 – Present",
-      image: "/images/projects/weefarm.png",
+      image: "/images/projects/wee-farm.png",
       github: "",
       live: "https://wee-farm.com/en",
       category: "professional",
@@ -101,32 +119,6 @@ export const portfolioDataEn = {
         "E-commerce platform for farmers built with Next.js and Node.js/Express backend.",
         "Integrated Konnect Pay payment gateway for secure transactions.",
         "Full-stack solution connecting farmers with customers, featuring product management and order processing."
-      ]
-    },
-    {
-      name: "Medical Recording",
-      date: "01/05/2025 – 06/07/2025",
-      image: "/images/projects/recordMedical.png",
-      github: "https://github.com/BelghithAdem/Medical_Record",
-      live: "",
-      category: "academic",
-      description: [
-        "Medical management system with ASP.NET Core backend and Next.js frontend.",
-        "Multi-role: Doctor, Patient, Admin with FullCalendar integration.",
-        "REST API with Swagger, PostgreSQL and Tailwind CSS interface."
-      ]
-    },
-    {
-      name: "Mincraft",
-      date: "01/2025 – 02/2025",
-      image: "/images/projects/Mincraft.png",
-      github: "https://gitlab.com/BelghithAdem/mincraft_frontend",
-      live: "https://mincraft-project-frontend.vercel.app/",
-      category: "academic",
-      description: [
-        "Web/mobile training platform (React/React Native).",
-        "High-performance admin panel, AWS S3 integration.",
-        "Deployment via Docker + GitLab CI/CD."
       ]
     },
     {
@@ -167,60 +159,52 @@ export const portfolioDataEn = {
         "Intuitive user interface with Vue 3 + Vite.",
         "Advanced search and navigation features."
       ]
-    },
-    {
-      name: "Social Media",
-      date: "09/2024 – 12/2024",
-      image: "/images/projects/Social1.png",
-      github: "https://github.com/BelghithAdem/Media",
-      live: "",
-      category: "academic",
-      description: [
-        "Secure social network with real-time messaging.",
-        "2FA authentication, WebSocket.",
-        "Stack: Spring Boot, Angular, Hibernate, Tailwind, MySQL."
-      ]
     }
   ],
   skills: {
     frontend: [
-      { name: "Angular", level: "Educational" },
       { name: "Vue.js", level: "Pro" },
       { name: "React", level: "Pro" },
       { name: "Next.js", level: "Pro" },
-      { name: "Tailwind CSS", level: "Pro" }
+      { name: "Tailwind CSS", level: "Pro" },
+      { name: "TypeScript", level: "Pro" }
     ],
     backend: [
-      { name: "Spring Boot", level: "Educational" },
       { name: "Node.js", level: "Pro" },
-      { name: "Express.js", level: "Pro" },
-      { name: "GraphQL", level: "Pro" },
-      { name: "REST API", level: "Pro" },
-      { name: "WebSocket", level: "Pro" }
+      { name: "FastAPI", level: "Pro" },
+      { name: "WebSocket", level: "Pro" },
+      { name: "Java", level: "Pro" },
+      { name: "Python", level: "Pro" }
     ],
     databases: [
-      { name: "MongoDB", level: "Educational" },
-      { name: "PostgreSQL", level: "Educational" },
+      { name: "PostgreSQL", level: "Pro" },
       { name: "MySQL", level: "Pro" },
-      { name: "MongoDB", level: "Pro" }
+      { name: "MongoDB", level: "Pro" },
+      { name: "Redis", level: "Pro" }
     ],
     devops: [
       { name: "Docker", level: "Pro" },
-      { name: "Docker Compose", level: "Pro" },
-      { name: "GitLab CI/CD", level: "Pro" }
+      { name: "Kubernetes", level: "Pro" },
+      { name: "GitLab CI/CD", level: "Pro" },
+      { name: "AWS", level: "Pro" },
+      { name: "Helm", level: "Pro" },
+      { name: "Prometheus", level: "Pro" },
+      { name: "Grafana", level: "Pro" },
+      { name: "Storybook", level: "Pro" },
+      { name: "Turborepo", level: "Pro" }
     ]
   },
   education: [
     {
-      institution: "Tek-up University",
+      institution: "Tek-up",
       location: "Ariana, Tunisia",
-      program: "Software Engineering and Information Systems Engineering Degree",
-      date: "2023 – Present"
+      program: "Engineering Cycle in Computer Science - Software Engineering and Information Systems Engineering Degree",
+      date: "2023 – 2026"
     },
     {
       institution: "ISET",
       location: "Kairouan, Tunisia",
-      program: "Computer Technology License",
+      program: "Computer Technology License - Specialized in computer technology",
       date: "2020 – 2023"
     }
   ],
