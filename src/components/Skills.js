@@ -1,177 +1,362 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { useTranslation } from 'react-i18next';
-import { FaCode, FaServer, FaDatabase, FaDocker, FaCheckCircle } from 'react-icons/fa';
-import { usePortfolioData } from '../hooks/usePortfolioData';
+import React, { useMemo } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useTranslation } from "react-i18next";
+
+import {
+  FaCheckCircle,
+  FaCog,
+  FaGlobe,
+  FaStar,
+  FaArrowRight,
+} from "react-icons/fa";
+
+import {
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiHtml5,
+  SiCss3,
+  SiNodedotjs,
+  SiExpress,
+  SiNestjs,
+  SiPostgresql,
+  SiMysql,
+  SiMongodb,
+  SiRedis,
+  SiDocker,
+  SiKubernetes,
+  SiGit,
+  SiGithub,
+  SiLinux,
+  SiNginx,
+  SiPostman,
+  SiPython,
+  SiOpenjdk,
+  SiVite,
+  SiFramer,
+} from "react-icons/si";
+
+import { usePortfolioData } from "../hooks/usePortfolioData";
+
+const badgeStyles = {
+  pro: "bg-emerald-500/15 text-emerald-200 border-emerald-500/30",
+  good: "bg-sky-500/15 text-sky-200 border-sky-500/30",
+};
+
+const levelToBadge = (level) => {
+  const lv = (level || "").toLowerCase();
+  if (lv.includes("pro")) return { label: level, cls: badgeStyles.pro };
+  return { label: level, cls: badgeStyles.good };
+};
+
+const getLanguageRating = (level) => {
+  const lv = (level || "").toLowerCase();
+  if (lv.includes("natif") || lv.includes("native")) return 5;
+  if (lv.includes("courant") || lv.includes("fluent")) return 4;
+  return 3;
+};
+
+// ✅ Map skill name => icon (you can add more here anytime)
+const iconMap = {
+  // Frontend
+  javascript: SiJavascript,
+  js: SiJavascript,
+  typescript: SiTypescript,
+  ts: SiTypescript,
+  react: SiReact,
+  "next.js": SiNextdotjs,
+  nextjs: SiNextdotjs,
+  tailwind: SiTailwindcss,
+  tailwindcss: SiTailwindcss,
+  html: SiHtml5,
+  html5: SiHtml5,
+  css: SiCss3,
+  css3: SiCss3,
+  vite: SiVite,
+  "framer motion": SiFramer,
+
+  // Backend
+  node: SiNodedotjs,
+  nodejs: SiNodedotjs,
+  "node.js": SiNodedotjs,
+  express: SiExpress,
+  nest: SiNestjs,
+  nestjs: SiNestjs,
+  python: SiPython,
+  java: SiOpenjdk,
+
+  // Databases
+  postgresql: SiPostgresql,
+  postgres: SiPostgresql,
+  mysql: SiMysql,
+  mongodb: SiMongodb,
+  mongo: SiMongodb,
+  redis: SiRedis,
+
+  // DevOps / Tools
+  docker: SiDocker,
+  kubernetes: SiKubernetes,
+  git: SiGit,
+  github: SiGithub,
+  linux: SiLinux,
+  nginx: SiNginx,
+  postman: SiPostman,
+};
+
+const SkillIcon = ({ name }) => {
+  const key = (name || "").trim().toLowerCase();
+  const Icon = iconMap[key];
+  if (!Icon) return <FaCheckCircle className="opacity-70" />;
+  return <Icon className="text-[18px] opacity-90" />;
+};
 
 const Skills = () => {
   const { t } = useTranslation();
   const portfolioData = usePortfolioData();
+
   const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true
+    threshold: 0.12,
+    triggerOnce: true,
   });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
+  const containerVariants = useMemo(
+    () => ({
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.08 },
+      },
+    }),
+    []
+  );
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.4
-      }
-    }
-  };
+  const itemVariants = useMemo(
+    () => ({
+      hidden: { opacity: 0, y: 18 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.55, ease: "easeOut" },
+      },
+    }),
+    []
+  );
 
-  const skillCategories = [
-    {
-      title: t('skills.frontend'),
-      icon: <FaCode className="text-xl" />,
-      skills: portfolioData.skills.frontend,
-      iconColor: "text-blue-600"
-    },
-    {
-      title: t('skills.backend'),
-      icon: <FaServer className="text-xl" />,
-      skills: portfolioData.skills.backend,
-      iconColor: "text-green-600"
-    },
-    {
-      title: t('skills.databases'),
-      icon: <FaDatabase className="text-xl" />,
-      skills: portfolioData.skills.databases,
-      iconColor: "text-purple-600"
-    },
-    {
-      title: t('skills.devops'),
-      icon: <FaDocker className="text-xl" />,
-      skills: portfolioData.skills.devops,
-      iconColor: "text-orange-600"
-    }
-  ];
+  const categories = useMemo(
+    () => [
+      {
+        title: t("skills.frontend"),
+        skills: portfolioData.skills.frontend,
+        accent: "from-sky-500/15 to-indigo-500/10",
+        border: "border-white/10",
+        glow: "shadow-[0_0_0_1px_rgba(255,255,255,0.08)]",
+      },
+      {
+        title: t("skills.backend"),
+        skills: portfolioData.skills.backend,
+        accent: "from-emerald-500/15 to-teal-500/10",
+        border: "border-white/10",
+        glow: "shadow-[0_0_0_1px_rgba(255,255,255,0.08)]",
+      },
+      {
+        title: t("skills.databases"),
+        skills: portfolioData.skills.databases,
+        accent: "from-fuchsia-500/15 to-purple-500/10",
+        border: "border-white/10",
+        glow: "shadow-[0_0_0_1px_rgba(255,255,255,0.08)]",
+      },
+      {
+        title: t("skills.devops"),
+        skills: portfolioData.skills.devops,
+        accent: "from-amber-500/15 to-orange-500/10",
+        border: "border-white/10",
+        glow: "shadow-[0_0_0_1px_rgba(255,255,255,0.08)]",
+      },
+    ],
+    [portfolioData, t]
+  );
 
   return (
-    <section id="skills" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
+    <section
+      id="skills"
+      className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-8"
+    >
+      {/* Professional dark gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0B1020] via-[#0B1228] to-[#090A12]" />
+      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.25),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(168,85,247,0.18),transparent_45%),radial-gradient(circle_at_35%_80%,rgba(34,197,94,0.16),transparent_45%)]" />
+
+      {/* subtle grid */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.08] bg-[linear-gradient(to_right,rgba(255,255,255,0.35)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.35)_1px,transparent_1px)] bg-[size:44px_44px]" />
+
+      <div className="container mx-auto relative z-10">
+        {/* Header */}
         <motion.div
           ref={ref}
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 28 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+          transition={{ duration: 0.75 }}
         >
-          <h2 className="section-title">{t('skills.title')}</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto mt-3">
-            {t('skills.subtitle')}
+          <motion.div
+            className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur"
+            whileHover={{ scale: 1.03 }}
+          >
+            <FaCog className="opacity-80" />
+            <span className="font-semibold">
+              {t("skills.badge") || "Compétences techniques"}
+            </span>
+          </motion.div>
+
+          <h2 className="mt-6 text-4xl md:text-6xl font-extrabold tracking-tight text-white">
+            {t("skills.title")}
+          </h2>
+
+          <p className="mt-5 text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+            {t("skills.subtitle")}
           </p>
         </motion.div>
 
-        {/* Skills Grid */}
+        {/* Categories */}
         <motion.div
-          className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 mb-12"
+          className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {skillCategories.map((category, index) => (
+          {categories.map((cat, idx) => (
             <motion.div
-              key={index}
-              className="bg-gray-50 rounded-lg p-6 border border-gray-200"
+              key={idx}
               variants={itemVariants}
+              whileHover={{ y: -6 }}
+              className={`relative rounded-3xl border ${cat.border} ${cat.glow} bg-gradient-to-br ${cat.accent} p-7 sm:p-8 backdrop-blur-xl`}
             >
-              {/* Category Header */}
-              <div className="flex items-center gap-3 mb-5">
-                <div className={`${category.iconColor}`}>
-                  {category.icon}
-                </div>
-                <h3 className="text-lg font-bold text-gray-900">{category.title}</h3>
+              <div className="absolute inset-0 rounded-3xl bg-white/[0.03] opacity-0 hover:opacity-100 transition-opacity" />
+
+              {/* Title row */}
+              <div className="relative flex items-center justify-between gap-4 mb-7">
+                <h3 className="text-2xl font-bold text-white">{cat.title}</h3>
+                <span className="text-xs text-white/60 border border-white/10 bg-white/5 rounded-full px-3 py-1">
+                  {cat.skills?.length || 0} skills
+                </span>
               </div>
 
-              {/* Skills List */}
-              <div className="space-y-3">
-                {category.skills.map((skill, skillIndex) => (
-                  <div
-                    key={skillIndex}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex items-center gap-2">
-                      <FaCheckCircle className="text-blue-600 text-xs flex-shrink-0" />
-                      <span className="text-gray-700 text-sm">{skill.name}</span>
-                    </div>
-                    <span className={`px-2 py-0.5 rounded text-xs font-medium ${
-                      skill.level === 'Pro' 
-                        ? 'bg-green-100 text-green-700' 
-                        : 'bg-blue-100 text-blue-700'
-                    }`}>
-                      {skill.level}
-                    </span>
-                  </div>
-                ))}
+              {/* Skill pills */}
+              <div className="relative grid gap-3">
+                {cat.skills?.map((skill, i) => {
+                  const badge = levelToBadge(skill.level);
+                  return (
+                    <motion.div
+                      key={i}
+                      className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                      whileHover={{ x: 4 }}
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <span className="grid place-items-center w-9 h-9 rounded-xl border border-white/10 bg-white/5 text-white">
+                          <SkillIcon name={skill.name} />
+                        </span>
+                        <span className="truncate text-white/90 font-semibold">
+                          {skill.name}
+                        </span>
+                      </div>
+
+                      <span
+                        className={`shrink-0 rounded-full border px-3 py-1 text-xs font-bold ${badge.cls}`}
+                      >
+                        {badge.label}
+                      </span>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Languages Section */}
+        {/* Languages */}
         <motion.div
-          className="max-w-5xl mx-auto mt-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
+          className="max-w-6xl mx-auto mt-16"
+          initial={{ opacity: 0, y: 26 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 26 }}
+          transition={{ delay: 0.45, duration: 0.75 }}
         >
-          <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">{t('skills.languages.title')}</h3>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            {Object.entries(portfolioData.languages).map(([language, level], index) => {
-              const getLanguageIcon = (lang) => {
-                switch (lang.toLowerCase()) {
-                  case 'anglais':
-                  case 'english':
-                    return '🇺🇸';
-                  case 'français':
-                  case 'french':
-                    return '🇫🇷';
-                  case 'arabe':
-                  case 'arabic':
-                    return '🇹🇳';
-                  default:
-                    return '🌍';
-                }
-              };
-
-              return (
-                <motion.div
-                  key={index}
-                  className="bg-gray-50 rounded-lg p-6 border border-gray-200 text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 + 0.5 }}
-                >
-                  <div className="text-3xl mb-3">{getLanguageIcon(language)}</div>
-                  <h4 className="text-lg font-bold text-gray-900 mb-2">{language}</h4>
-                  <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-md text-sm font-medium">
-                    {level}
-                  </span>
-                </motion.div>
-              );
-            })}
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur">
+              <FaGlobe className="opacity-80" />
+              <span className="font-semibold">
+                {t("skills.languages.badge") || "Langues"}
+              </span>
+            </div>
+            <h3 className="mt-5 text-3xl font-bold text-white">
+              {t("skills.languages.title")}
+            </h3>
           </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {Object.entries(portfolioData.languages || {}).map(
+              ([language, level], index) => {
+                const rating = getLanguageRating(level);
+                const flag =
+                  language.toLowerCase().includes("fr") ? "🇫🇷" :
+                  language.toLowerCase().includes("ang") ? "🇺🇸" :
+                  language.toLowerCase().includes("arab") ? "🇹🇳" : "🌍";
+
+                return (
+                  <motion.div
+                    key={index}
+                    className="rounded-3xl border border-white/10 bg-white/5 p-7 text-center backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.65 + index * 0.12 }}
+                    whileHover={{ y: -6 }}
+                  >
+                    <div className="text-5xl mb-4">{flag}</div>
+                    <div className="text-xl font-bold text-white">{language}</div>
+
+                    <div className="mt-3 flex items-center justify-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <FaStar
+                          key={i}
+                          className={`text-base ${
+                            i < rating ? "text-yellow-300" : "text-white/20"
+                          }`}
+                        />
+                      ))}
+                    </div>
+
+                    <div className="mt-4 inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-white/80">
+                      {level}
+                    </div>
+                  </motion.div>
+                );
+              }
+            )}
+          </div>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          className="text-center mt-16"
+          initial={{ opacity: 0, y: 18 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+          transition={{ delay: 1.1, duration: 0.75 }}
+        >
+          <a
+            href="#projects"
+            className="inline-flex items-center gap-3 rounded-full bg-white text-[#0B1020] px-7 py-3 font-bold shadow-lg hover:shadow-xl transition"
+          >
+            <span>{t("skills.cta") || "Voir mes projets"}</span>
+            <FaArrowRight />
+          </a>
         </motion.div>
       </div>
     </section>
   );
 };
 
-export default Skills; 
+export default Skills;
