@@ -1,190 +1,199 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-scroll';
-import { FaDownload, FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
-import { useTranslation } from 'react-i18next';
-import { usePortfolioData } from '../hooks/usePortfolioData';
+import React, { useMemo } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-scroll";
+import {
+  FaDownload,
+  FaLinkedin,
+  FaGithub,
+  FaEnvelope,
+  FaChevronDown,
+} from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+import { usePortfolioData } from "../hooks/usePortfolioData";
 
 const Hero = () => {
   const { t } = useTranslation();
   const portfolioData = usePortfolioData();
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3
-      }
-    }
-  };
 
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
-  };
+  const containerVariants = useMemo(
+    () => ({
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.12 },
+      },
+    }),
+    []
+  );
+
+  const itemVariants = useMemo(
+    () => ({
+      hidden: { opacity: 0, y: 18 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.6, ease: "easeOut" },
+      },
+    }),
+    []
+  );
+
+  // Floating aura
+  const Floating = ({ className, delay = 0, duration = 18 }) => (
+    <motion.div
+      className={className}
+      animate={{ y: [-14, 14, -14] }}
+      transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
+    />
+  );
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background Animation */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-cyan-50">
-        <motion.div
-          className="absolute top-20 left-20 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-60"
-          animate={{
-            scale: [1, 2, 2, 1, 1],
-            rotate: [0, 90, 180, 270, 360],
-          }}
-          transition={{
-            duration: 20,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
-        <motion.div
-          className="absolute top-40 right-20 w-72 h-72 bg-cyan-200 rounded-full mix-blend-multiply filter blur-xl opacity-60"
-          animate={{
-            scale: [2, 1, 1, 2, 2],
-            rotate: [360, 270, 180, 90, 0],
-          }}
-          transition={{
-            duration: 25,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-8 left-20 w-72 h-72 bg-slate-200 rounded-full mix-blend-multiply filter blur-xl opacity-50"
-          animate={{
-            scale: [1, 2, 2, 1, 1],
-            rotate: [180, 270, 360, 90, 180],
-          }}
-          transition={{
-            duration: 30,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
-      </div>
+    <section
+      id="home"
+      className="relative min-h-screen overflow-hidden flex items-center justify-center px-4 sm:px-6 md:px-8"
+    >
+      {/* Premium background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0B1020] via-[#0B1228] to-[#090A12]" />
+      <div className="absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_15%_25%,rgba(56,189,248,0.25),transparent_45%),radial-gradient(circle_at_85%_30%,rgba(168,85,247,0.20),transparent_45%),radial-gradient(circle_at_25%_85%,rgba(34,197,94,0.14),transparent_45%)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.08] bg-[linear-gradient(to_right,rgba(255,255,255,0.35)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.35)_1px,transparent_1px)] bg-[size:44px_44px]" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      {/* Subtle floating blobs */}
+      <Floating
+        className="absolute -top-10 left-10 w-64 h-64 rounded-full bg-sky-500/10 blur-3xl"
+        delay={0}
+        duration={22}
+      />
+      <Floating
+        className="absolute top-40 -right-10 w-72 h-72 rounded-full bg-fuchsia-500/10 blur-3xl"
+        delay={2}
+        duration={26}
+      />
+      <Floating
+        className="absolute bottom-10 left-1/4 w-72 h-72 rounded-full bg-emerald-500/10 blur-3xl"
+        delay={3}
+        duration={24}
+      />
+
+      <div className="container mx-auto relative z-10 max-w-6xl">
         <motion.div
           className="text-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Greeting */}
-          <motion.div
-            className="text-lg md:text-xl text-gray-600 mb-4"
-            variants={itemVariants}
-          >
-            {t('hero.greeting')}
+          {/* Badge */}
+          <motion.div variants={itemVariants} className="mb-7">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur">
+              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="font-semibold">
+                {t("hero.greeting") || "Hello 👋"}
+              </span>
+            </div>
           </motion.div>
 
           {/* Name */}
           <motion.h1
-            className="text-5xl md:text-7xl font-bold text-gray-800 mb-6"
             variants={itemVariants}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white"
           >
-            {portfolioData.name}
+            <span className="text-white/90">{portfolioData.name}</span>
+            <span className="block mt-2 bg-gradient-to-r from-sky-300 via-white to-fuchsia-300 bg-clip-text text-transparent">
+              {t("hero.title")}
+            </span>
           </motion.h1>
 
-          {/* Title */}
-          <motion.h2
-            className="text-2xl md:text-3xl text-blue-600 font-semibold mb-8"
-            variants={itemVariants}
-          >
-            {t('hero.title')}
-          </motion.h2>
-
-          {/* Description */}
+          {/* Subtitle/Description */}
           <motion.p
-            className="text-lg text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed"
             variants={itemVariants}
+            className="mt-6 text-base sm:text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed"
           >
-            {t('hero.description')}
+            {t("hero.description")}
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTAs */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
             variants={itemVariants}
+            className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center"
           >
             <motion.a
               href="https://flowcv.com/resume/o6vebkrtdq"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.99 }}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl bg-white text-[#0B1020] font-extrabold px-7 py-4 shadow-lg hover:shadow-xl transition"
             >
               <FaDownload />
-              {t('hero.downloadCv')}
+              <span>{t("hero.downloadCv")}</span>
             </motion.a>
 
-            <Link to="projects" smooth={true} duration={500} offset={-80}>
+            <Link to="projects" smooth duration={500} offset={-80}>
               <motion.button
-                className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 flex items-center gap-2"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.99 }}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl border border-white/15 bg-white/5 text-white font-bold px-7 py-4 backdrop-blur hover:bg-white/[0.08] transition"
               >
-                {t('hero.viewProjects')}
+                <span>{t("hero.viewProjects")}</span>
+                <FaChevronDown className="opacity-80" />
               </motion.button>
             </Link>
           </motion.div>
 
-          {/* Social Links */}
+          {/* Social */}
           <motion.div
-            className="flex justify-center space-x-6 mb-8"
             variants={itemVariants}
+            className="mt-9 flex justify-center gap-3 sm:gap-4"
           >
-            <motion.a
-              href={portfolioData.contact.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-blue-600 transition-colors"
-              whileHover={{ scale: 1.2, y: -3 }}
-            >
-              <FaLinkedin size={28} />
-            </motion.a>
-            <motion.a
-              href={portfolioData.contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-800 transition-colors"
-              whileHover={{ scale: 1.2, y: -3 }}
-            >
-              <FaGithub size={28} />
-            </motion.a>
-            <motion.a
-              href={`mailto:${portfolioData.contact.email}`}
-              className="text-gray-600 hover:text-red-600 transition-colors"
-              whileHover={{ scale: 1.2, y: -3 }}
-            >
-              <FaEnvelope size={28} />
-            </motion.a>
+            {[
+              {
+                icon: <FaLinkedin />,
+                href: portfolioData.contact.linkedin,
+                label: "LinkedIn",
+              },
+              {
+                icon: <FaGithub />,
+                href: portfolioData.contact.github,
+                label: "GitHub",
+              },
+              {
+                icon: <FaEnvelope />,
+                href: `mailto:${portfolioData.contact.email}`,
+                label: "Email",
+              },
+            ].map((s, i) => (
+              <motion.a
+                key={i}
+                href={s.href}
+                target={s.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={s.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-white/85 backdrop-blur hover:bg-white/[0.08] transition"
+                aria-label={s.label}
+              >
+                <span className="opacity-90">{s.icon}</span>
+                <span className="text-sm font-semibold">{s.label}</span>
+              </motion.a>
+            ))}
           </motion.div>
 
-          {/* Scroll Indicator */}
+          {/* Scroll indicator */}
           <motion.div
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            variants={itemVariants}
+            className="mt-12 flex justify-center"
           >
-            <Link to="about" smooth={true} duration={500} offset={-80}>
+            <Link to="about" smooth duration={500} offset={-80}>
               <motion.div
-                className="text-gray-600 hover:text-blue-600 cursor-pointer"
-                whileHover={{ scale: 1.1 }}
+                className="cursor-pointer inline-flex items-center gap-2 text-white/60 hover:text-white/80 transition"
+                whileHover={{ y: -2 }}
               >
+                <span className="text-sm font-semibold">Scroll</span>
+                <motion.span
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <FaChevronDown />
+                </motion.span>
               </motion.div>
             </Link>
           </motion.div>
@@ -194,4 +203,4 @@ const Hero = () => {
   );
 };
 
-export default Hero; 
+export default Hero;

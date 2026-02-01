@@ -32,6 +32,7 @@
     "viewMore": "View more experiences"
   },
   "projects": {
+    "badge": "Selected Projects",
     "title": "My Projects",
     "subtitle": "A selection of my academic and professional achievements",
     "viewProject": "View project",
@@ -41,8 +42,10 @@
     "professional": "Professional"
   },
   "skills": {
+    "badge": "Technical Skills",
     "title": "Technical Skills",
     "subtitle": "Deep technical expertise in modern web and mobile development technologies",
+    "cta": "View my projects",
     "frontend": "Frontend",
     "backend": "Backend",
     "databases": "Databases",
@@ -56,6 +59,7 @@
       "innovation": "Innovation"
     },
     "languages": {
+      "badge": "Languages",
       "title": "Languages",
       "subtitle": "Linguistic mastery for effective international communication",
       "comprehension": "Comprehension",
