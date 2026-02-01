@@ -54,7 +54,6 @@ const Projects = () => {
     return <FaCode className="text-white/90" />;
   };
 
-  // Keep your project-specific tech lists (same logic, but styled better)
   const getProjectTechnologies = (project) => {
     const name = project?.name || "";
     const tech = (arr) => arr.map((x) => ({ name: x }));
@@ -72,12 +71,37 @@ const Projects = () => {
   const getProjectImage = (project) =>
     project.image || "https://via.placeholder.com/1200x800/0B1020/FFFFFF?text=Project+Preview";
 
-  const getPrimaryLink = (project) => (project.live && project.live.trim() ? project.live : project.github || "#");
+  // ✅ stricter “live” detection (fixes badge not showing correctly)
+  const normalizeUrl = (v) => (typeof v === "string" ? v.trim() : "");
+  const isValidUrl = (url) => {
+    const u = normalizeUrl(url);
+    if (!u) return false;
+    if (u === "#" || u === "/") return false;
+    // Accept https/http
+    if (u.startsWith("http://") || u.startsWith("https://")) return true;
+    // Accept common cases like www.domain.com
+    if (u.startsWith("www.")) return true;
+    return false;
+  };
+
+  const isLive = (project) => project?.isLive === true || isValidUrl(project?.live);
+
+  const getLiveLink = (project) => {
+    const u = normalizeUrl(project?.live);
+    if (!u) return "";
+    // if "www." make it https
+    if (u.startsWith("www.")) return `https://${u}`;
+    return u;
+  };
+
+  const getPrimaryLink = (project) => {
+    if (isLive(project)) return getLiveLink(project);
+    const gh = normalizeUrl(project?.github);
+    return gh || "#";
+  };
 
   const getRepoIcon = (project) =>
     project.github && project.github.includes("gitlab.com") ? <FaGitlab /> : <FaGithub />;
-
-  const isLive = (project) => Boolean(project.live && project.live.trim());
 
   const categoryLabel = (project) => (project.category === "professional" ? "Pro" : "Académique");
 
@@ -85,7 +109,7 @@ const Projects = () => {
     <section id="projects" className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-8">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0B1020] via-[#0B1228] to-[#090A12]" />
-      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_15%_25%,rgba(56,189,248,0.18),transparent_45%),radial-gradient(circle_at_85%_30%,rgba(168,85,247,0.16),transparent_45%),radial-gradient(circle_at_30%_85%,rgba(34,197,94,0.12),transparent_45%)]" />
+      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.25),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(168,85,247,0.18),transparent_45%),radial-gradient(circle_at_35%_80%,rgba(34,197,94,0.16),transparent_45%)]" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.08] bg-[linear-gradient(to_right,rgba(255,255,255,0.35)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.35)_1px,transparent_1px)] bg-[size:44px_44px]" />
 
       <div className="container mx-auto relative z-10 max-w-6xl">
@@ -121,13 +145,17 @@ const Projects = () => {
         >
           {portfolioData.projects.map((project, index) => {
             const techs = getProjectTechnologies(project);
+
             return (
               <motion.article
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -6 }}
-                className="group rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden
-                           shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:bg-white/[0.07] transition"
+                className="
+                  group rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden
+                  shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:bg-white/[0.07] transition
+                  flex flex-col h-full
+                "
               >
                 {/* Image */}
                 <div className="relative overflow-hidden">
@@ -151,6 +179,7 @@ const Projects = () => {
                     )}
                   </div>
 
+                  {/* ✅ Live badge (fixed) */}
                   {isLive(project) && (
                     <div className="absolute top-4 right-4">
                       <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-200">
@@ -175,7 +204,7 @@ const Projects = () => {
                     )}
                     {isLive(project) && (
                       <a
-                        href={project.live}
+                        href={getLiveLink(project)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-10 h-10 grid place-items-center rounded-full border border-white/10 bg-white/10 text-white/85 hover:bg-white/20 transition"
@@ -187,8 +216,8 @@ const Projects = () => {
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-6">
+                {/* Content (flex-1 so buttons stick bottom) */}
+                <div className="p-6 flex flex-col flex-1">
                   {/* Title row */}
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 rounded-2xl border border-white/10 bg-white/5 grid place-items-center">
@@ -218,9 +247,7 @@ const Projects = () => {
                   {/* Tech */}
                   {techs.length > 0 && (
                     <div className="mt-5">
-                      <div className="text-xs font-extrabold text-white/60 mb-2">
-                        Technologies
-                      </div>
+                      <div className="text-xs font-extrabold text-white/60 mb-2">Technologies</div>
                       <div className="flex flex-wrap gap-2">
                         {techs.slice(0, 5).map((tech, i) => (
                           <motion.span
@@ -243,8 +270,8 @@ const Projects = () => {
                     </div>
                   )}
 
-                  {/* Actions */}
-                  <div className="mt-6 flex gap-2">
+                  {/* ✅ Buttons always same position (bottom) */}
+                  <div className="mt-auto pt-6 flex gap-2">
                     <motion.a
                       href={getPrimaryLink(project)}
                       target="_blank"

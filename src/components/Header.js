@@ -71,7 +71,7 @@ const Header = () => {
             "border border-white/10 backdrop-blur-xl",
             "transition-all duration-300",
             scrolled
-              ? "bg-[#0B1020]/65 shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
+              ? "bg-emerald-950/70 border-emerald-500/20 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_0_30px_rgba(16,185,129,0.25),0_0_60px_rgba(16,185,129,0.12)]"
               : "bg-[#0B1020]/35",
           ].join(" ")}
         >

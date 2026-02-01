@@ -194,8 +194,6 @@ function App() {
               <About />
             </SectionWrapper>
 
-            <SectionDivider variant="dots" />
-
             <SectionWrapper delay={0.2}>
               <Experience />
             </SectionWrapper>
@@ -211,8 +209,6 @@ function App() {
             <SectionWrapper delay={0.4}>
               <Skills />
             </SectionWrapper>
-
-            <SectionDivider variant="dots" />
 
             <SectionWrapper delay={0.5}>
               <Education />

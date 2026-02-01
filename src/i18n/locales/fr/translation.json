@@ -32,7 +32,8 @@
     "viewMore": "Voir plus d'expériences"
   },
   "projects": {
-    "title": "Mes Projets",
+    "badge": "Projets sélectionnés",
+    "title": "Mes contributions à des projets",
     "subtitle": "Une sélection de mes réalisations académiques et professionnelles",
     "viewProject": "Voir le projet",
     "liveDemo": "Démo Live",
@@ -41,8 +42,10 @@
     "professional": "Professionnel"
   },
   "skills": {
+    "badge": "Compétences techniques",
     "title": "Compétences Techniques",
     "subtitle": "Expertise technique approfondie dans les technologies modernes du développement web et mobile",
+    "cta": "Voir mes projets",
     "frontend": "Frontend",
     "backend": "Backend",
     "databases": "Bases de données",
@@ -56,6 +59,7 @@
       "innovation": "Innovation"
     },
     "languages": {
+      "badge": "Langues",
       "title": "Langues",
       "subtitle": "Maîtrise linguistique pour une communication internationale efficace",
       "comprehension": "Compréhension",

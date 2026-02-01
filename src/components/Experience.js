@@ -70,9 +70,9 @@ const Experience = () => {
 
   return (
     <section id="experience" className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-8">
-      {/* Background (same system as other sections) */}
+      {/* Background (matches Skills section) */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0B1020] via-[#0B1228] to-[#090A12]" />
-      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_15%_25%,rgba(56,189,248,0.18),transparent_45%),radial-gradient(circle_at_85%_30%,rgba(168,85,247,0.16),transparent_45%),radial-gradient(circle_at_30%_85%,rgba(34,197,94,0.12),transparent_45%)]" />
+      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.25),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(168,85,247,0.18),transparent_45%),radial-gradient(circle_at_35%_80%,rgba(34,197,94,0.16),transparent_45%)]" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.08] bg-[linear-gradient(to_right,rgba(255,255,255,0.35)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.35)_1px,transparent_1px)] bg-[size:44px_44px]" />
 
       <div className="container mx-auto relative z-10 max-w-6xl">
