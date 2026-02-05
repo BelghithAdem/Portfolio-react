@@ -4,11 +4,11 @@ import { useInView } from "react-intersection-observer";
 import {
   FaGithub,
   FaGitlab,
-  FaExternalLinkAlt,
   FaCode,
   FaMobile,
   FaServer,
   FaEye,
+  FaMusic,
   FaVuejs,
   FaWordpress,
   FaShoppingCart,
@@ -46,11 +46,13 @@ const Projects = () => {
   const getProjectIcon = (name = "") => {
     const n = name.toLowerCase();
     if (n.includes("social")) return <FaServer className="text-white/90" />;
+    if (n.includes("rentsmart")) return <FaMobile className="text-white/90" />;
     if (n.includes("mincraft") || n.includes("minecraft")) return <FaMobile className="text-white/90" />;
     if (n.includes("quran")) return <FaVuejs className="text-white/90" />;
     if (n.includes("tech gateway")) return <FaWordpress className="text-white/90" />;
     if (n.includes("dhiya")) return <FaShoppingCart className="text-white/90" />;
     if (n.includes("medical")) return <FaStethoscope className="text-white/90" />;
+    if (n.includes("california")) return <FaMusic className="text-white/90" />;
     return <FaCode className="text-white/90" />;
   };
 
@@ -64,6 +66,9 @@ const Projects = () => {
     if (name === "Tech Gateway") return tech(["WordPress", "WooCommerce", "PHP", "MySQL", "SEO", "Responsive"]);
     if (name === "Dhiya Store") return tech(["WordPress", "WooCommerce", "PHP", "MySQL", "E-commerce", "Custom Orders"]);
     if (name === "Medical Recording") return tech(["ASP.NET Core", "Next.js", "PostgreSQL", "Tailwind CSS", "FullCalendar", "Swagger"]);
+    if (name === "RentSmart") return tech(["React Native", "Expo", "iOS", "Android", "TypeScript"]);
+    if (name === "California Gym Music") return tech(["Next.js", "Node.js", "Spotify API", "SMTP", "Playlists", "Scheduling"]);
+    if (name === "WeeFarm") return tech(["Next.js", "Node.js", "Tailwind CSS", "Turborepo", "Microfrontend", "Storybook", "Konnect Pay", "GitHub Actions"]);
 
     return Array.isArray(project?.technologies) ? tech(project.technologies) : [];
   };
@@ -179,16 +184,6 @@ const Projects = () => {
                     )}
                   </div>
 
-                  {/* ✅ Live badge (fixed) */}
-                  {isLive(project) && (
-                    <div className="absolute top-4 right-4">
-                      <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-200">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                        Live
-                      </span>
-                    </div>
-                  )}
-
                   {/* Top action icons */}
                   <div className="absolute bottom-4 right-4 flex gap-2">
                     {project.github && (
@@ -200,17 +195,6 @@ const Projects = () => {
                         aria-label="Repository"
                       >
                         {getRepoIcon(project)}
-                      </a>
-                    )}
-                    {isLive(project) && (
-                      <a
-                        href={getLiveLink(project)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 grid place-items-center rounded-full border border-white/10 bg-white/10 text-white/85 hover:bg-white/20 transition"
-                        aria-label="Live demo"
-                      >
-                        <FaExternalLinkAlt />
                       </a>
                     )}
                   </div>

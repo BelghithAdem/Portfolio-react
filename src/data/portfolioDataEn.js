@@ -3,10 +3,11 @@ export const portfolioDataEn = {
   title: "Full-Stack Developer",
   contact: {
     email: "BelghithAdem20@gmail.com",
-    phone: "+216 29 394 089",
+    phone: "+216 54 021 345",
     location: "Tunisia, Ariana",
     linkedin: "https://linkedin.com/in/belghith-adem-92982b197",
     github: "https://github.com/BelghithAdem",
+    gitlab: "https://gitlab.com/BelghithAdem",
     portfolio: "https://belghithadem.netlify.app/"
   },
   profile: "Full-Stack Software Engineer specialized in developing modern, performant, and scalable web applications. Experience with SaaS projects, monorepo, and modern frontend architectures.",
@@ -108,6 +109,34 @@ export const portfolioDataEn = {
     }
   ],
   projects: [
+    {
+      name: "RentSmart",
+      date: "2024 – Present",
+      image: "/images/projects/rentsmart.png",
+      github: "",
+      live: "https://play.google.com/store/apps/details?id=hk.com.rentsmart&hl=fr",
+      category: "professional",
+      type: "Mobile App (iOS & Android)",
+      description: [
+        "React Native & Expo iOS and Android application for rent payment in Hong Kong.",
+        "Pay rent with credit card, earn miles and cashback. 10k+ downloads on Google Play.",
+        "RentSmart - 交租有「里」賞. Residential, commercial, parking, deposits and agency fees."
+      ]
+    },
+    {
+      name: "California Gym Music",
+      date: "2024 – Present",
+      image: "/images/projects/california.png",
+      github: "",
+      live: "https://music.california-gym.com",
+      category: "professional",
+      type: "Music Management System",
+      description: [
+        "Next.js & Node.js music management system for California Gym salle and cours.",
+        "Spotify integration, scheduling, advertisements, and playlists from Spotify or file upload.",
+        "Manage music across gym rooms (salle cours and other salles)."
+      ]
+    },
     {
       name: "WeeFarm",
       date: "2024 – Present",

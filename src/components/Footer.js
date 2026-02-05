@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import {
   FaLinkedin,
   FaGithub,
+  FaGitlab,
   FaGlobe,
   FaHeart,
   FaEnvelope,
@@ -22,6 +23,7 @@ const Footer = () => {
     () => [
       { icon: <FaLinkedin />, name: "LinkedIn", url: portfolioData.contact.linkedin },
       { icon: <FaGithub />, name: "GitHub", url: portfolioData.contact.github },
+      { icon: <FaGitlab />, name: "GitLab", url: portfolioData.contact.gitlab },
       { icon: <FaGlobe />, name: "Portfolio", url: portfolioData.contact.portfolio },
     ],
     [portfolioData]

@@ -3,10 +3,11 @@ export const portfolioDataFr = {
     title: "Développeur Full-Stack",
     contact: {
       email: "BelghithAdem20@gmail.com",
-      phone: "+216 29 394 089",
+      phone: "+216 54 021 345",
       location: "Tunisie, Ariana",
       linkedin: "https://linkedin.com/in/belghith-adem-92982b197",
       github: "https://github.com/BelghithAdem",
+      gitlab: "https://gitlab.com/BelghithAdem",
       portfolio: "https://belghithadem.netlify.app/"
     },
     profile: "Ingénieur logiciel Full-Stack spécialisé dans le développement d'applications web modernes, performantes et scalables. Expérience sur des projets SaaS, monorepo et architectures frontend modernes.",
@@ -108,6 +109,34 @@ export const portfolioDataFr = {
       }
     ],
     projects: [
+      {
+        name: "RentSmart",
+        date: "2024 – Présent",
+        image: "/images/projects/rentsmart.png",
+        github: "",
+        live: "https://play.google.com/store/apps/details?id=hk.com.rentsmart&hl=fr",
+        category: "professional",
+        type: "Application mobile (iOS & Android)",
+        description: [
+          "Application React Native & Expo iOS et Android pour le paiement du loyer à Hong Kong.",
+          "Payer son loyer par carte bancaire, cumuler des miles et du cashback. 10 k+ téléchargements sur Google Play.",
+          "RentSmart - 交租有「里」賞. Résidentiel, commercial, parking, dépôts et frais d'agence."
+        ]
+      },
+      {
+        name: "California Gym Music",
+        date: "2024 – Présent",
+        image: "/images/projects/california.png",
+        github: "",
+        live: "https://music.california-gym.com",
+        category: "professional",
+        type: "Système de gestion musicale",
+        description: [
+          "Système de gestion musicale Next.js & Node.js pour la salle et les cours California Gym.",
+          "Intégration Spotify, planification, publicités et playlists depuis Spotify ou fichiers.",
+          "Gestion de la musique dans les salles (salle cours et autres salles)."
+        ]
+      },
       {
         name: "WeeFarm",
         date: "2024 – Présent",
