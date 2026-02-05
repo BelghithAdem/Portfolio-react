@@ -88,12 +88,13 @@ const LanguageSwitcher = () => {
             transition={{ duration: 0.18, ease: "easeOut" }}
             className="
               absolute right-0 mt-2 z-50 min-w-[170px]
-              rounded-2xl border border-white/10 bg-[#0B1020]/92
-              backdrop-blur-xl shadow-2xl overflow-hidden
+              rounded-2xl border border-white/15
+              bg-[#0D1324] shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_20px_50px_-12px_rgba(0,0,0,0.6)]
+              backdrop-blur-xl overflow-hidden
             "
             role="menu"
           >
-            <div className="px-4 py-3 border-b border-white/10 text-xs font-extrabold tracking-wider text-white/50 uppercase">
+            <div className="px-4 py-3 border-b border-white/10 bg-white/[0.04] text-xs font-extrabold tracking-wider text-white/60 uppercase">
               Language
             </div>
 

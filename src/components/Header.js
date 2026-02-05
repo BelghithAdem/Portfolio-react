@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-scroll";
-import { FaBars, FaTimes, FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { usePortfolioData } from "../hooks/usePortfolioData";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -39,14 +39,6 @@ const Header = () => {
     [t]
   );
 
-  const social = useMemo(
-    () => [
-      { icon: <FaLinkedin />, href: portfolioData.contact.linkedin, label: "LinkedIn" },
-      { icon: <FaGithub />, href: portfolioData.contact.github, label: "GitHub" },
-      { icon: <FaEnvelope />, href: `mailto:${portfolioData.contact.email}`, label: "Email" },
-    ],
-    [portfolioData]
-  );
 
   return (
     <motion.header
@@ -111,20 +103,6 @@ const Header = () => {
               <LanguageSwitcher />
             </div>
 
-            {social.map((s, i) => (
-              <motion.a
-                key={i}
-                href={s.href}
-                target={s.href.startsWith("mailto:") ? undefined : "_blank"}
-                rel={s.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                aria-label={s.label}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 text-white/85 hover:bg-white/10 hover:text-white transition"
-              >
-                {s.icon}
-              </motion.a>
-            ))}
           </div>
 
           {/* Mobile button */}
@@ -193,21 +171,6 @@ const Header = () => {
                       >
                         {item.name}
                       </Link>
-                    ))}
-                  </div>
-
-                  <div className="mt-6 flex items-center justify-center gap-3">
-                    {social.map((s, i) => (
-                      <a
-                        key={i}
-                        href={s.href}
-                        target={s.href.startsWith("mailto:") ? undefined : "_blank"}
-                        rel={s.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                        aria-label={s.label}
-                        className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/10 bg-white/5 text-white/85 hover:bg-white/10 hover:text-white transition"
-                      >
-                        {s.icon}
-                      </a>
                     ))}
                   </div>
 

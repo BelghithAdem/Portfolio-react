@@ -7,6 +7,7 @@ import {
   FaMapMarkerAlt,
   FaLinkedin,
   FaGithub,
+  FaGitlab,
   FaGlobe,
   FaPaperPlane,
   FaCheckCircle,
@@ -104,6 +105,11 @@ const Contact = () => {
         icon: <FaGithub />,
         name: "GitHub",
         url: portfolioData.contact.github,
+      },
+      {
+        icon: <FaGitlab />,
+        name: "GitLab",
+        url: portfolioData.contact.gitlab,
       },
       {
         icon: <FaGlobe />,

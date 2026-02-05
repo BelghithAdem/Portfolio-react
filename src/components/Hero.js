@@ -5,6 +5,7 @@ import {
   FaDownload,
   FaLinkedin,
   FaGithub,
+  FaGitlab,
   FaEnvelope,
   FaChevronDown,
 } from "react-icons/fa";
@@ -154,6 +155,11 @@ const Hero = () => {
                 icon: <FaGithub />,
                 href: portfolioData.contact.github,
                 label: "GitHub",
+              },
+              {
+                icon: <FaGitlab />,
+                href: portfolioData.contact.gitlab,
+                label: "GitLab",
               },
               {
                 icon: <FaEnvelope />,
