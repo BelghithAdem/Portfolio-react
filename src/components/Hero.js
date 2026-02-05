@@ -143,7 +143,7 @@ const Hero = () => {
           {/* Social */}
           <motion.div
             variants={itemVariants}
-            className="mt-9 flex justify-center gap-3 sm:gap-4"
+            className="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto"
           >
             {[
               {
@@ -174,7 +174,7 @@ const Hero = () => {
                 rel={s.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-white/85 backdrop-blur hover:bg-white/[0.08] transition"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-white/85 backdrop-blur hover:bg-white/[0.08] transition"
                 aria-label={s.label}
               >
                 <span className="opacity-90">{s.icon}</span>
