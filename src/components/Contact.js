@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React, { useState, useMemo, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import {
   FaEnvelope,
   FaPhone,
@@ -17,11 +17,27 @@ import { usePortfolioData } from "../hooks/usePortfolioData";
 
 const Contact = () => {
   const portfolioData = usePortfolioData();
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const leftColRef = useRef(null);
+  const rightColRef = useRef(null);
 
-  const [ref, inView] = useInView({
-    threshold: 0.14,
-    triggerOnce: true,
-  });
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        defaults: { ease: "power3.out" },
+      });
+      tl.fromTo(headerRef.current, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.65 })
+        .fromTo(leftColRef.current, { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.6 }, "-=0.35")
+        .fromTo(rightColRef.current, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.6 }, "-=0.45");
+    },
+    { scope: sectionRef, dependencies: [] }
+  );
 
   const [formData, setFormData] = useState({
     name: "",
@@ -49,26 +65,6 @@ const Contact = () => {
       setTimeout(() => setIsSubmitted(false), 2600);
     }, 1400);
   };
-
-  const containerVariants = useMemo(
-    () => ({
-      hidden: { opacity: 0 },
-      visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
-    }),
-    []
-  );
-
-  const itemVariants = useMemo(
-    () => ({
-      hidden: { opacity: 0, y: 18 },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.6, ease: "easeOut" },
-      },
-    }),
-    []
-  );
 
   const contactInfo = useMemo(
     () => [
@@ -121,28 +117,23 @@ const Contact = () => {
   );
 
   return (
-    <section id="contact" className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-8">
+    <section id="contact" ref={sectionRef} className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-8">
       {/* Background (matches Skills section) */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0B1020] via-[#0B1228] to-[#090A12]" />
       <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.25),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(168,85,247,0.18),transparent_45%),radial-gradient(circle_at_35%_80%,rgba(34,197,94,0.16),transparent_45%)]" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.08] bg-[linear-gradient(to_right,rgba(255,255,255,0.35)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.35)_1px,transparent_1px)] bg-[size:44px_44px]" />
 
       <div className="container mx-auto max-w-6xl relative z-10 w-full">
-        {/* Header */}
-        <motion.div
-          ref={ref}
+        <div
+          ref={headerRef}
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.75 }}
         >
-          <motion.div
-            className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur"
-            whileHover={{ scale: 1.03 }}
+          <div
+            className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur hover:scale-[1.03] transition-transform"
           >
             <FaComments className="opacity-80" />
             <span className="font-semibold">Restons en contact</span>
-          </motion.div>
+          </div>
 
           <h2 className="mt-6 text-4xl md:text-6xl font-extrabold tracking-tight text-white">
             Contact
@@ -151,29 +142,20 @@ const Contact = () => {
           <p className="mt-5 text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
             Intéressé par mon profil ? Contactez-moi pour discuter de vos besoins, d’un projet ou d’une opportunité.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
-          {/* Left column */}
-          <motion.div
-            className="space-y-7"
-            variants={containerVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-          >
-            <motion.div variants={itemVariants}>
-              <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
-                <span className="grid place-items-center w-11 h-11 rounded-2xl border border-white/10 bg-white/5 text-white">
-                  <FaEnvelope />
-                </span>
-                Informations de contact
-              </h3>
-            </motion.div>
+          <div ref={leftColRef} className="space-y-7">
+            <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+              <span className="grid place-items-center w-11 h-11 rounded-2xl border border-white/10 bg-white/5 text-white">
+                <FaEnvelope />
+              </span>
+              Informations de contact
+            </h3>
 
-            {/* Contact cards */}
             <div className="space-y-4">
               {contactInfo.map((info, index) => (
-                <motion.div key={index} variants={itemVariants} whileHover={{ y: -3 }}>
+                <div key={index} className="hover:-translate-y-0.5 transition">
                   <a
                     href={info.link}
                     className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:bg-white/[0.07] transition"
@@ -193,12 +175,11 @@ const Contact = () => {
                       <span className="text-sm">↗</span>
                     </div>
                   </a>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            {/* Social */}
-            <motion.div variants={itemVariants} className="pt-2">
+            <div className="pt-2">
               <h4 className="text-lg md:text-xl font-bold text-white mb-4 flex items-center gap-3">
                 <span className="grid place-items-center w-9 h-9 rounded-2xl border border-white/10 bg-white/5 text-white">
                   <FaGlobe />
@@ -208,58 +189,26 @@ const Contact = () => {
 
               <div className="flex flex-wrap gap-3">
                 {socialLinks.map((social, index) => (
-                  <motion.a
+                  <a
                     key={index}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-white/85 font-semibold backdrop-blur hover:bg-white/[0.08] transition"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-white/85 font-semibold backdrop-blur hover:bg-white/[0.08] hover:-translate-y-0.5 transition"
                   >
                     <span className="opacity-90">{social.icon}</span>
                     <span className="text-sm md:text-base">{social.name}</span>
-                  </motion.a>
+                  </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
+          </div>
 
-            {/* Availability */}
-            <motion.div
-              variants={itemVariants}
-              className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-            >
-              <div className="flex items-center gap-3">
-                <span className="grid place-items-center w-10 h-10 rounded-2xl border border-white/10 bg-white/5 text-emerald-300">
-                  <FaCheckCircle />
-                </span>
-                <h4 className="text-lg md:text-xl font-bold text-white">Disponibilité</h4>
-              </div>
-
-              <div className="mt-4 grid gap-2.5 text-white/80">
-                {[
-                  "Disponible pour un job part-time (PFE en cours)",
-                  "Réponse rapide sous 24h",
-                  "Réunion en ligne possible",
-                  "Remote ou sur site selon le besoin",
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <span className="mt-2 w-2 h-2 rounded-full bg-emerald-400" />
-                    <span className="text-sm md:text-base leading-relaxed">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right column: Form */}
-          <motion.div
+          <div
+            ref={rightColRef}
             className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8 md:p-10 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-            variants={containerVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
           >
-            <motion.div variants={itemVariants} className="mb-8">
+            <div className="mb-8">
               <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
                 <span className="text-white/85">
                   <FaPaperPlane />
@@ -269,14 +218,10 @@ const Contact = () => {
               <p className="mt-3 text-white/70">
                 Remplissez le formulaire et je vous répondrai rapidement.
               </p>
-            </motion.div>
+            </div>
 
             {isSubmitted ? (
-              <motion.div
-                className="text-center py-10"
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-              >
+              <div className="text-center py-10">
                 <div className="mx-auto w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 grid place-items-center">
                   <FaCheckCircle className="text-emerald-300 text-2xl" />
                 </div>
@@ -284,11 +229,11 @@ const Contact = () => {
                 <p className="mt-2 text-white/70">
                   Merci. Je reviens vers vous très bientôt.
                 </p>
-              </motion.div>
+              </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <motion.div variants={itemVariants}>
+                  <div>
                     <label className="block text-sm font-semibold text-white/80 mb-2" htmlFor="name">
                       Nom complet *
                     </label>
@@ -302,9 +247,9 @@ const Contact = () => {
                       placeholder="Votre nom"
                       className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 outline-none focus:border-sky-400/40 focus:ring-4 focus:ring-sky-500/10 transition"
                     />
-                  </motion.div>
+                  </div>
 
-                  <motion.div variants={itemVariants}>
+                  <div>
                     <label className="block text-sm font-semibold text-white/80 mb-2" htmlFor="email">
                       Email *
                     </label>
@@ -318,10 +263,10 @@ const Contact = () => {
                       placeholder="votre@email.com"
                       className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 outline-none focus:border-sky-400/40 focus:ring-4 focus:ring-sky-500/10 transition"
                     />
-                  </motion.div>
+                  </div>
                 </div>
 
-                <motion.div variants={itemVariants}>
+                <div>
                   <label className="block text-sm font-semibold text-white/80 mb-2" htmlFor="subject">
                     Sujet *
                   </label>
@@ -335,9 +280,9 @@ const Contact = () => {
                     placeholder="Sujet de votre message"
                     className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 outline-none focus:border-sky-400/40 focus:ring-4 focus:ring-sky-500/10 transition"
                   />
-                </motion.div>
+                </div>
 
-                <motion.div variants={itemVariants}>
+                <div>
                   <label className="block text-sm font-semibold text-white/80 mb-2" htmlFor="message">
                     Message *
                   </label>
@@ -351,15 +296,12 @@ const Contact = () => {
                     placeholder="Décrivez votre besoin / projet..."
                     className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 outline-none focus:border-sky-400/40 focus:ring-4 focus:ring-sky-500/10 transition resize-none"
                   />
-                </motion.div>
+                </div>
 
-                <motion.button
+                <button
                   type="submit"
                   disabled={isSubmitting}
-                  variants={itemVariants}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.99 }}
-                  className="w-full inline-flex items-center justify-center gap-3 rounded-2xl bg-white text-[#0B1020] font-extrabold px-6 py-4 shadow-lg hover:shadow-xl transition disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full inline-flex items-center justify-center gap-3 rounded-2xl bg-white text-[#0B1020] font-extrabold px-6 py-4 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.99] transition disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
@@ -372,14 +314,14 @@ const Contact = () => {
                       <span>Envoyer</span>
                     </>
                   )}
-                </motion.button>
+                </button>
 
                 <p className="text-xs text-white/50 leading-relaxed pt-1">
                   En envoyant ce message, vous acceptez d’être contacté par email.
                 </p>
               </form>
             )}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

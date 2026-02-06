@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './index.css';
 import App from './App';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Suppress extension-related errors in console
 if (typeof window !== 'undefined') {

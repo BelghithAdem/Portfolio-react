@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React, { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import {
   FaGithub,
   FaGitlab,
@@ -21,26 +21,31 @@ import { usePortfolioData } from "../hooks/usePortfolioData";
 const Projects = () => {
   const { t } = useTranslation();
   const portfolioData = usePortfolioData();
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const cardsRef = useRef([]);
+  const ctaRef = useRef(null);
 
-  const [ref, inView] = useInView({
-    threshold: 0.18,
-    triggerOnce: true,
-  });
-
-  const containerVariants = useMemo(
-    () => ({
-      hidden: { opacity: 0 },
-      visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
-    }),
-    []
-  );
-
-  const itemVariants = useMemo(
-    () => ({
-      hidden: { opacity: 0, y: 18 },
-      visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-    }),
-    []
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        defaults: { ease: "power3.out" },
+      });
+      tl.fromTo(headerRef.current, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.65 })
+        .fromTo(
+          cardsRef.current,
+          { opacity: 0, scale: 0.92 },
+          { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1 },
+          "-=0.3"
+        )
+        .fromTo(ctaRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.2");
+    },
+    { scope: sectionRef, dependencies: [portfolioData.projects?.length] }
   );
 
   const getProjectIcon = (name = "") => {
@@ -111,7 +116,7 @@ const Projects = () => {
   const categoryLabel = (project) => (project.category === "professional" ? "Pro" : "Académique");
 
   return (
-    <section id="projects" className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-8">
+    <section id="projects" ref={sectionRef} className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-8">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0B1020] via-[#0B1228] to-[#090A12]" />
       <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.25),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(168,85,247,0.18),transparent_45%),radial-gradient(circle_at_35%_80%,rgba(34,197,94,0.16),transparent_45%)]" />
@@ -119,48 +124,29 @@ const Projects = () => {
 
       <div className="container mx-auto relative z-10 max-w-6xl">
         {/* Header */}
-        <motion.div
-          ref={ref}
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.75 }}
-        >
+        <div ref={headerRef} className="text-center mb-16">
           <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur">
             <FaCode className="opacity-80" />
             <span className="font-semibold">{t("projects.badge") || "Projets sélectionnés"}</span>
           </div>
-
           <h2 className="mt-6 text-4xl md:text-6xl font-extrabold tracking-tight text-white">
             {t("projects.title")}
           </h2>
-
           <p className="mt-5 text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
             {t("projects.subtitle") ||
               "Découvrez une sélection de projets qui démontrent mes compétences et mon approche orientée qualité."}
           </p>
-        </motion.div>
+        </div>
 
         {/* Grid */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {portfolioData.projects.map((project, index) => {
             const techs = getProjectTechnologies(project);
-
             return (
-              <motion.article
+              <article
                 key={index}
-                variants={itemVariants}
-                whileHover={{ y: -6 }}
-                className="
-                  group rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden
-                  shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:bg-white/[0.07] transition
-                  flex flex-col h-full
-                "
+                ref={(el) => (cardsRef.current[index] = el)}
+                className="group rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:bg-white/[0.07] hover:-translate-y-1.5 transition flex flex-col h-full"
               >
                 {/* Image */}
                 <div className="relative overflow-hidden">
@@ -234,16 +220,12 @@ const Projects = () => {
                       <div className="text-xs font-extrabold text-white/60 mb-2">Technologies</div>
                       <div className="flex flex-wrap gap-2">
                         {techs.slice(0, 5).map((tech, i) => (
-                          <motion.span
+                          <span
                             key={i}
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: i * 0.03 }}
-                            whileHover={{ y: -1 }}
-                            className="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-semibold text-white/75"
+                            className="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-semibold text-white/75 hover:-translate-y-0.5 transition"
                           >
                             {tech.name}
-                          </motion.span>
+                          </span>
                         ))}
                         {techs.length > 5 && (
                           <span className="px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-semibold text-white/55">
@@ -254,66 +236,51 @@ const Projects = () => {
                     </div>
                   )}
 
-                  {/* ✅ Buttons always same position (bottom) */}
                   <div className="mt-auto pt-6 flex gap-2">
-                    <motion.a
+                    <a
                       href={getPrimaryLink(project)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ y: -2 }}
-                      whileTap={{ scale: 0.99 }}
-                      className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-white text-[#0B1020] font-extrabold px-4 py-3 shadow-lg hover:shadow-xl transition"
+                      className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-white text-[#0B1020] font-extrabold px-4 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.99] transition"
                     >
                       <FaEye />
                       <span>Voir le projet</span>
                       <FaArrowRight />
-                    </motion.a>
-
+                    </a>
                     {project.github && (
-                      <motion.a
+                      <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ y: -2 }}
-                        whileTap={{ scale: 0.99 }}
-                        className="inline-flex items-center justify-center w-12 rounded-2xl border border-white/10 bg-white/5 text-white/85 hover:bg-white/10 transition"
+                        className="inline-flex items-center justify-center w-12 rounded-2xl border border-white/10 bg-white/5 text-white/85 hover:bg-white/10 hover:-translate-y-0.5 transition"
                         aria-label="Repository"
                       >
                         {getRepoIcon(project)}
-                      </motion.a>
+                      </a>
                     )}
                   </div>
                 </div>
-              </motion.article>
+              </article>
             );
           })}
-        </motion.div>
+        </div>
 
         {/* CTA */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 18 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-          transition={{ delay: 0.7, duration: 0.7 }}
-        >
+        <div ref={ctaRef} className="text-center mt-16">
           <p className="text-white/70 text-lg mb-6">
             Vous voulez voir plus ? Retrouvez tous mes projets sur GitHub.
           </p>
-
-          <motion.a
+          <a
             href={portfolioData.contact.github}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.99 }}
-            className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 text-white font-extrabold px-7 py-4
-                       backdrop-blur hover:bg-white/10 transition shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
+            className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 text-white font-extrabold px-7 py-4 backdrop-blur hover:bg-white/10 hover:-translate-y-0.5 transition shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
           >
             <FaGithub />
             <span>Voir plus de projets</span>
             <FaArrowRight />
-          </motion.a>
-        </motion.div>
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React, { useMemo, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import {
   FaGraduationCap,
   FaMapMarkerAlt,
@@ -17,22 +17,28 @@ import { Link } from "react-scroll";
 
 const Education = () => {
   const portfolioData = usePortfolioData();
-  const [ref, inView] = useInView({ threshold: 0.14, triggerOnce: true });
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const leftColRef = useRef(null);
+  const rightColRef = useRef(null);
+  const ctaRef = useRef(null);
 
-  const containerVariants = useMemo(
-    () => ({
-      hidden: { opacity: 0 },
-      visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-    }),
-    []
-  );
-
-  const itemVariants = useMemo(
-    () => ({
-      hidden: { opacity: 0, y: 18 },
-      visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-    }),
-    []
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        defaults: { ease: "power3.out" },
+      });
+      tl.fromTo(headerRef.current, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.65 })
+        .fromTo(leftColRef.current, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.6 }, "-=0.35")
+        .fromTo(rightColRef.current, { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 0.6 }, "-=0.45")
+        .fromTo(ctaRef.current, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.3");
+    },
+    { scope: sectionRef, dependencies: [] }
   );
 
   const isOngoing = (date = "") =>
@@ -51,67 +57,44 @@ const Education = () => {
   );
 
   return (
-    <section id="education" className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-8">
+    <section id="education" ref={sectionRef} className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-8">
       {/* Background (matches Skills section) */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0B1020] via-[#0B1228] to-[#090A12]" />
       <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.25),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(168,85,247,0.18),transparent_45%),radial-gradient(circle_at_35%_80%,rgba(34,197,94,0.16),transparent_45%)]" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.08] bg-[linear-gradient(to_right,rgba(255,255,255,0.35)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.35)_1px,transparent_1px)] bg-[size:44px_44px]" />
 
       <div className="container mx-auto relative z-10 max-w-6xl">
-        {/* Header */}
-        <motion.div
-          ref={ref}
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.75 }}
-        >
+        <div ref={headerRef} className="text-center mb-16">
           <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur">
             <FaBookOpen className="opacity-80" />
             <span className="font-semibold">Parcours académique</span>
           </div>
-
           <h2 className="mt-6 text-4xl md:text-6xl font-extrabold tracking-tight text-white">
             Formation & Certifications
           </h2>
-
           <p className="mt-5 text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
             Mon parcours académique et mes certifications professionnelles.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-12">
-          {/* Education timeline */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-          >
-            <motion.div variants={itemVariants} className="flex items-center gap-3 mb-8">
+          <div ref={leftColRef}>
+            <div className="flex items-center gap-3 mb-8">
               <div className="w-11 h-11 rounded-2xl border border-white/10 bg-white/5 grid place-items-center text-sky-200">
                 <FaGraduationCap />
               </div>
               <h3 className="text-2xl font-extrabold text-white">Formation</h3>
-            </motion.div>
+            </div>
 
             <div className="relative">
-              {/* line */}
               <div className="absolute left-5 top-0 bottom-0 w-[2px] bg-white/10 rounded-full" />
-
               <div className="grid gap-6">
                 {portfolioData.education.map((edu, index) => (
-                  <motion.div key={index} variants={itemVariants} className="relative pl-14">
-                    {/* dot */}
+                  <div key={index} className="relative pl-14">
                     <div className="absolute left-[14px] top-7 -translate-x-1/2">
                       <div className="w-4 h-4 rounded-full bg-sky-400 ring-8 ring-sky-400/15 border border-white/10" />
                     </div>
-
-                    {/* card */}
-                    <motion.div
-                      whileHover={{ y: -4 }}
-                      className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-7 backdrop-blur-xl
-                                 shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:bg-white/[0.07] transition"
-                    >
+                    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-7 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:bg-white/[0.07] hover:-translate-y-1 transition">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                         <div className="min-w-0">
                           <h4 className="text-lg sm:text-xl font-extrabold text-white">
@@ -156,34 +139,26 @@ const Education = () => {
                           <FaStar key={i} className="text-sm" />
                         ))}
                       </div>
-                    </motion.div>
-                  </motion.div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Certifications */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-          >
-            <motion.div variants={itemVariants} className="flex items-center gap-3 mb-8">
+          <div ref={rightColRef}>
+            <div className="flex items-center gap-3 mb-8">
               <div className="w-11 h-11 rounded-2xl border border-white/10 bg-white/5 grid place-items-center text-emerald-200">
                 <FaCertificate />
               </div>
               <h3 className="text-2xl font-extrabold text-white">Certifications</h3>
-            </motion.div>
+            </div>
 
             <div className="grid gap-6">
               {portfolioData.certifications.map((cert, index) => (
-                <motion.div
+                <div
                   key={index}
-                  variants={itemVariants}
-                  whileHover={{ y: -4 }}
-                  className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-7 backdrop-blur-xl
-                             shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:bg-white/[0.07] transition"
+                  className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-7 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:bg-white/[0.07] hover:-translate-y-1 transition"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="min-w-0">
@@ -205,19 +180,15 @@ const Education = () => {
                     </div>
 
                     {cert.url && (
-                      <motion.a
+                      <a
                         href={cert.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ y: -2 }}
-                        whileTap={{ scale: 0.99 }}
-                        className="shrink-0 w-11 h-11 grid place-items-center rounded-2xl
-                                   border border-emerald-400/25 bg-emerald-500/10 text-emerald-200
-                                   hover:bg-emerald-500/15 transition"
+                        className="shrink-0 w-11 h-11 grid place-items-center rounded-2xl border border-emerald-400/25 bg-emerald-500/10 text-emerald-200 hover:bg-emerald-500/15 hover:-translate-y-0.5 transition"
                         aria-label="Voir la certification"
                       >
                         <FaExternalLinkAlt />
-                      </motion.a>
+                      </a>
                     )}
                   </div>
 
@@ -234,18 +205,11 @@ const Education = () => {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            {/* Continuous learning card */}
-            <motion.div
-              className="mt-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-7 backdrop-blur-xl
-                         shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-              initial={{ opacity: 0, y: 18 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-              transition={{ delay: 0.5, duration: 0.7 }}
-            >
+            <div className="mt-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-7 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08)]">
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-11 h-11 rounded-2xl border border-white/10 bg-white/5 grid place-items-center text-fuchsia-200">
                   <FaBookOpen />
@@ -264,30 +228,22 @@ const Education = () => {
                   </div>
                 ))}
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
 
-        {/* CTA */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 18 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-          transition={{ delay: 0.9, duration: 0.7 }}
-        >
+        <div ref={ctaRef} className="text-center mt-16">
           <Link to="contact" smooth duration={500} offset={-90}>
-            <motion.button
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.99 }}
-              className="inline-flex items-center gap-3 rounded-2xl bg-white text-[#0B1020]
-                         px-7 py-4 font-extrabold shadow-lg hover:shadow-xl transition"
+            <button
+              type="button"
+              className="inline-flex items-center gap-3 rounded-2xl bg-white text-[#0B1020] px-7 py-4 font-extrabold shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.99] transition"
             >
               <FaExternalLinkAlt />
               <span>Me contacter</span>
               <FaArrowRight />
-            </motion.button>
+            </button>
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
