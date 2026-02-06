@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React, { useMemo, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -126,33 +126,33 @@ const LANG_CONFIG = {
 const Skills = () => {
   const { t } = useTranslation();
   const portfolioData = usePortfolioData();
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const categoryCardsRef = useRef([]);
+  const languagesRef = useRef(null);
+  const ctaRef = useRef(null);
 
-  const [ref, inView] = useInView({
-    threshold: 0.12,
-    triggerOnce: true,
-  });
-
-  const containerVariants = useMemo(
-    () => ({
-      hidden: { opacity: 0 },
-      visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.08 },
-      },
-    }),
-    []
-  );
-
-  const itemVariants = useMemo(
-    () => ({
-      hidden: { opacity: 0, y: 18 },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.55, ease: "easeOut" },
-      },
-    }),
-    []
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        defaults: { ease: "power3.out" },
+      });
+      tl.fromTo(headerRef.current, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.65 })
+        .fromTo(
+          categoryCardsRef.current,
+          { opacity: 0, y: 36 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 },
+          "-=0.3"
+        )
+        .fromTo(languagesRef.current, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.2")
+        .fromTo(ctaRef.current, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.2");
+    },
+    { scope: sectionRef, dependencies: [] }
   );
 
   const categories = useMemo(
@@ -190,55 +190,31 @@ const Skills = () => {
   );
 
   return (
-    <section
-      id="skills"
-      className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-8"
-    >
+    <section id="skills" ref={sectionRef} className="relative overflow-hidden py-24 px-4 sm:px-6 md:px-8">
       <div className="absolute inset-0 bg-gradient-to-br from-[#0B1020] via-[#0B1228] to-[#090A12]" />
       <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.25),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(168,85,247,0.18),transparent_45%),radial-gradient(circle_at_35%_80%,rgba(34,197,94,0.16),transparent_45%)]" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.08] bg-[linear-gradient(to_right,rgba(255,255,255,0.35)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.35)_1px,transparent_1px)] bg-[size:44px_44px]" />
 
       <div className="container mx-auto relative z-10">
-        {/* Header */}
-        <motion.div
-          ref={ref}
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 28 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-          transition={{ duration: 0.75 }}
-        >
-          <motion.div
-            className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur"
-            whileHover={{ scale: 1.03 }}
-          >
+        <div ref={headerRef} className="text-center mb-16">
+          <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur hover:scale-[1.03] transition-transform">
             <FaCog className="opacity-80" />
-            <span className="font-semibold">
-              {t("skills.badge") || "Compétences techniques"}
-            </span>
-          </motion.div>
-
+            <span className="font-semibold">{t("skills.badge") || "Compétences techniques"}</span>
+          </div>
           <h2 className="mt-6 text-4xl md:text-6xl font-extrabold tracking-tight text-white">
             {t("skills.title")}
           </h2>
-
           <p className="mt-5 text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
             {t("skills.subtitle")}
           </p>
-        </motion.div>
+        </div>
 
-        {/* Categories */}
-        <motion.div
-          className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
           {categories.map((cat, idx) => (
-            <motion.div
+            <div
               key={idx}
-              variants={itemVariants}
-              whileHover={{ y: -6 }}
-              className={`relative rounded-3xl border ${cat.border} ${cat.glow} bg-gradient-to-br ${cat.accent} p-7 sm:p-8 backdrop-blur-xl`}
+              ref={(el) => (categoryCardsRef.current[idx] = el)}
+              className={`relative rounded-3xl border ${cat.border} ${cat.glow} bg-gradient-to-br ${cat.accent} p-7 sm:p-8 backdrop-blur-xl hover:-translate-y-1.5 transition`}
             >
               <div className="absolute inset-0 rounded-3xl bg-white/[0.03] opacity-0 hover:opacity-100 transition-opacity" />
 
@@ -253,13 +229,9 @@ const Skills = () => {
                 {cat.skills?.map((skill, i) => {
                   const badge = levelToBadge(skill.level);
                   return (
-                    <motion.div
+                    <div
                       key={i}
-                      className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.05 }}
-                      whileHover={{ x: 4 }}
+                      className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 hover:translate-x-1 transition"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <span className="grid place-items-center w-9 h-9 rounded-xl border border-white/10 bg-white/5 text-white">
@@ -275,21 +247,15 @@ const Skills = () => {
                       >
                         {badge.label}
                       </span>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* ✅ Languages (fixed flags + forced ratings/labels) */}
-        <motion.div
-          className="max-w-6xl mx-auto mt-16"
-          initial={{ opacity: 0, y: 26 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 26 }}
-          transition={{ delay: 0.45, duration: 0.75 }}
-        >
+        <div ref={languagesRef} className="max-w-6xl mx-auto mt-16">
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur">
               <FaGlobe className="opacity-80" />
@@ -307,15 +273,10 @@ const Skills = () => {
               ([language, _level], index) => {
                 const key = normalizeLangKey(language);
                 const cfg = LANG_CONFIG[key] || LANG_CONFIG.other;
-
                 return (
-                  <motion.div
+                  <div
                     key={index}
-                    className="rounded-3xl border border-white/10 bg-white/5 p-7 text-center backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.65 + index * 0.12 }}
-                    whileHover={{ y: -6 }}
+                    className="rounded-3xl border border-white/10 bg-white/5 p-7 text-center backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:-translate-y-1.5 transition"
                   >
                     {/* Flag + code (code ensures US/FR/TN show if emoji don't render) */}
                     <div className="flex flex-col items-center gap-1 mb-4">
@@ -342,28 +303,22 @@ const Skills = () => {
                     <div className="mt-4 inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-white/80">
                       {cfg.displayLevel}
                     </div>
-                  </motion.div>
+                  </div>
                 );
               }
             )}
           </div>
-        </motion.div>
+        </div>
 
-        {/* CTA */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 18 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-          transition={{ delay: 1.1, duration: 0.75 }}
-        >
+        <div ref={ctaRef} className="text-center mt-16">
           <a
             href="#projects"
-            className="inline-flex items-center gap-3 rounded-full bg-white text-[#0B1020] px-7 py-3 font-bold shadow-lg hover:shadow-xl transition"
+            className="inline-flex items-center gap-3 rounded-full bg-white text-[#0B1020] px-7 py-3 font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition"
           >
             <span>{t("skills.cta") || "Voir mes projets"}</span>
             <FaArrowRight />
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
