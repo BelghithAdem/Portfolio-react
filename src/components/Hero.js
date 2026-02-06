@@ -83,20 +83,14 @@ const Hero = () => {
           animate="visible"
         >
           {/* Badge */}
-          <motion.div variants={itemVariants} className="mb-7">
+          <motion.div variants={itemVariants} className="mt-8 sm:mt-0 mb-7">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur">
               <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
-              <span className="font-semibold">Available for work</span>
+              <span className="font-semibold">
+                {t("hero.greeting")}
+              </span>
             </div>
           </motion.div>
-
-          {/* Greeting Text */}
-          <motion.p
-            variants={itemVariants}
-            className="text-lg sm:text-xl md:text-2xl text-white/70 font-medium mb-4"
-          >
-            {t("hero.greeting")}
-          </motion.p>
 
           {/* Name */}
           <motion.h1

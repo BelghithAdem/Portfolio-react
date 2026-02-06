@@ -224,32 +224,6 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            {/* Availability */}
-            <motion.div
-              variants={itemVariants}
-              className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-            >
-              <div className="flex items-center gap-3">
-                <span className="grid place-items-center w-10 h-10 rounded-2xl border border-white/10 bg-white/5 text-emerald-300">
-                  <FaCheckCircle />
-                </span>
-                <h4 className="text-lg md:text-xl font-bold text-white">Disponibilité</h4>
-              </div>
-
-              <div className="mt-4 grid gap-2.5 text-white/80">
-                {[
-                  "Disponible pour un job part-time (PFE en cours)",
-                  "Réponse rapide sous 24h",
-                  "Réunion en ligne possible",
-                  "Remote ou sur site selon le besoin",
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <span className="mt-2 w-2 h-2 rounded-full bg-emerald-400" />
-                    <span className="text-sm md:text-base leading-relaxed">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Right column: Form */}

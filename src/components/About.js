@@ -127,25 +127,6 @@ const About = () => {
             {t("about.description")}
           </motion.p>
 
-          {/* Intro + Working / Learning */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-8 max-w-2xl mx-auto rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08)]"
-          >
-            <p className="text-lg font-semibold text-white/90 mb-4">
-              {t("about.intro")}
-            </p>
-            <ul className="space-y-2 text-white/75">
-              <li className="flex items-start gap-3">
-                <span className="text-lg mt-0.5" aria-hidden>🔭</span>
-                <span>{t("about.working")}</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-lg mt-0.5" aria-hidden>📚</span>
-                <span>{t("about.learning")}</span>
-              </li>
-            </ul>
-          </motion.div>
         </motion.div>
 
         {/* Qualities */}
