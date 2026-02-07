@@ -83,7 +83,6 @@ const Hero = () => {
           yoyo: true,
           ease: "sine.inOut",
         });
-        
       }
 
       // Subtle float animation for background blobs
@@ -106,7 +105,7 @@ const Hero = () => {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden flex items-center justify-center px-4 sm:px-6 md:px-8 mt-12 sm:mt-16 md:mt-20 lg:mt-24"
+      className="relative min-h-screen overflow-hidden flex items-center justify-center px-4 sm:px-6 md:px-8"
     >
       {/* Premium background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0B1020] via-[#0B1228] to-[#090A12]" />
@@ -130,7 +129,7 @@ const Hero = () => {
       <div className="container mx-auto relative z-10 max-w-6xl">
         <div className="text-center">
           {/* Badge */}
-          <div ref={badgeRef} className="mt-8 sm:mt-0 mb-7 opacity-0">
+          <div ref={badgeRef} className="mt-6 sm:mt-8 md:mt-10 lg:mt-12 mb-7 opacity-0">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/80 backdrop-blur">
               <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
               <span className="font-semibold">{t("hero.greeting")}</span>
